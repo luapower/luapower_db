@@ -149,8 +149,7 @@ return {
 				mdeps={
 					cbframe=true,
 					ffi=true,
-					ffi_reflect=true,
-					pp=true
+					ffi_reflect=true
 				}
 			},
 			cbframe_dump={
@@ -1169,7 +1168,6 @@ return {
 					ffi=true,
 					glue=true,
 					heap=true,
-					pp=true,
 					time=true,
 					xlib=true,
 					xlib_keysym_h=true
@@ -2317,8 +2315,7 @@ return {
 				mdeps={
 					cbframe=true,
 					ffi=true,
-					ffi_reflect=true,
-					pp=true
+					ffi_reflect=true
 				}
 			},
 			cbframe_dump={
@@ -3205,7 +3202,6 @@ return {
 		},
 		luapower_db={
 			luapower_db={
-				loaderr='module \'luapower_db\' not found'
 			}
 		},
 		luastate={
@@ -3344,7 +3340,6 @@ return {
 					ffi=true,
 					glue=true,
 					heap=true,
-					pp=true,
 					time=true,
 					xlib=true,
 					xlib_keysym_h=true
@@ -4522,8 +4517,7 @@ return {
 				mdeps={
 					cbframe=true,
 					ffi=true,
-					ffi_reflect=true,
-					pp=true
+					ffi_reflect=true
 				}
 			},
 			cbframe_dump={
@@ -7379,8 +7373,7 @@ return {
 				mdeps={
 					cbframe=true,
 					ffi=true,
-					ffi_reflect=true,
-					pp=true
+					ffi_reflect=true
 				}
 			},
 			cbframe_dump={
@@ -10251,8 +10244,7 @@ return {
 				mdeps={
 					cbframe=true,
 					ffi=true,
-					ffi_reflect=true,
-					pp=true
+					ffi_reflect=true
 				}
 			},
 			cbframe_dump={
@@ -11268,6 +11260,8 @@ return {
 					['/System/Library/Frameworks/ApplicationServices.framework/Versions/Current/Frameworks/CoreGraphics.framework/CoreGraphics']=true,
 					['/System/Library/Frameworks/ApplicationServices.framework/Versions/Current/Frameworks/CoreGraphics.framework/Resources/BridgeSupport/CoreGraphics.dylib']=true,
 					['/System/Library/Frameworks/Carbon.framework/Versions/Current/Frameworks/HIToolbox.framework/HIToolbox']=true,
+					['/System/Library/Frameworks/CoreFoundation.framework/CoreFoundation']=true,
+					['/System/Library/Frameworks/CoreFoundation.framework/Resources/BridgeSupport/CoreFoundation.dylib']=true,
 					['/System/Library/Frameworks/Foundation.framework/Foundation']=true,
 					['/System/Library/Frameworks/Foundation.framework/Resources/BridgeSupport/Foundation.dylib']=true
 				},
@@ -12413,8 +12407,7 @@ return {
 				mdeps={
 					cbframe=true,
 					ffi=true,
-					ffi_reflect=true,
-					pp=true
+					ffi_reflect=true
 				}
 			},
 			cbframe_dump={
@@ -13430,6 +13423,8 @@ return {
 					['/System/Library/Frameworks/ApplicationServices.framework/Versions/Current/Frameworks/CoreGraphics.framework/CoreGraphics']=true,
 					['/System/Library/Frameworks/ApplicationServices.framework/Versions/Current/Frameworks/CoreGraphics.framework/Resources/BridgeSupport/CoreGraphics.dylib']=true,
 					['/System/Library/Frameworks/Carbon.framework/Versions/Current/Frameworks/HIToolbox.framework/HIToolbox']=true,
+					['/System/Library/Frameworks/CoreFoundation.framework/CoreFoundation']=true,
+					['/System/Library/Frameworks/CoreFoundation.framework/Resources/BridgeSupport/CoreFoundation.dylib']=true,
 					['/System/Library/Frameworks/Foundation.framework/Foundation']=true,
 					['/System/Library/Frameworks/Foundation.framework/Resources/BridgeSupport/Foundation.dylib']=true
 				},
