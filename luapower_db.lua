@@ -116,11 +116,20 @@ return {
 		},
 		bundle={
 			bundle={
-				loaderr='./bundle.lua:5: not a module'
+				mdeps={
+					bundle_appversion=true,
+					ffi=true
+				}
 			},
 			bundle_loader={
 				mdeps={
 					ffi=true
+				}
+			},
+			bundle_luastate={
+				mdeps={
+					ffi=true,
+					luastate=true
 				}
 			}
 		},
@@ -225,6 +234,8 @@ return {
 				}
 			}
 		},
+		code={
+		},
 		codedit={
 			codedit={
 			}
@@ -281,10 +292,15 @@ return {
 			},
 			dasm_x64={
 				mdeps={
-					dasm_x86=true
+					dasm_x86x64=true
 				}
 			},
 			dasm_x86={
+				mdeps={
+					dasm_x86x64=true
+				}
+			},
+			dasm_x86x64={
 			},
 			dynasm={
 			}
@@ -451,6 +467,12 @@ return {
 				}
 			}
 		},
+		['fonts-awesome']={
+		},
+		['fonts-ionicons']={
+		},
+		['fonts-material-icons']={
+		},
 		freetype={
 			freetype={
 				ffi_deps={
@@ -567,7 +589,6 @@ return {
 		grid={
 			grid_band={
 				mdeps={
-					glue=true,
 					grid_band_layout=true
 				}
 			},
@@ -724,6 +745,11 @@ return {
 				mdeps={
 					bitmap=true,
 					ffi=true,
+					imgui=true
+				}
+			},
+			imgui_scrollbars={
+				mdeps={
 					imgui=true
 				}
 			}
@@ -1039,6 +1065,9 @@ return {
 		luaparser={
 			luaparser={
 				loaderr='./luaparser.lua:15: ./ljstr.lua:6: libljstr.so: cannot open shared object file: No such file or directory'
+			},
+			luaparser_lpeg={
+				loaderr='./luaparser_lpeg.lua:201: bad argument #2 to \'match\' (string expected, got nil)'
 			}
 		},
 		luapower={
@@ -1063,6 +1092,8 @@ return {
 		['luapower-ci']={
 		},
 		['luapower-repos']={
+		},
+		['luapower-repos-dev']={
 		},
 		luapower_db={
 			luapower_db={
@@ -1165,7 +1196,13 @@ return {
 		},
 		nanojpeg={
 			nanojpeg={
-				loaderr='./nanojpeg.lua:7: ./stdio.lua:190: cannot change a protected metatable'
+				ffi_deps={
+					nanojpeg2=true
+				},
+				mdeps={
+					ffi=true,
+					glue=true
+				}
 			}
 		},
 		nw={
@@ -1199,7 +1236,12 @@ return {
 		},
 		obj_parser={
 			obj_loader={
-				loaderr='./obj_loader.lua:8: ./stdio.lua:190: cannot change a protected metatable'
+				mdeps={
+					ffi=true,
+					glue=true,
+					obj_parser=true,
+					tuple=true
+				}
 			},
 			obj_parser={
 				mdeps={
@@ -1264,6 +1306,16 @@ return {
 				}
 			},
 			openvg_h={
+				mdeps={
+					ffi=true
+				}
+			}
+		},
+		opus={
+			opus={
+				loaderr='./opus.lua:7: libopus.so: cannot open shared object file: No such file or directory'
+			},
+			opus_h={
 				mdeps={
 					ffi=true
 				}
@@ -1407,6 +1459,31 @@ return {
 			path2d_text={
 			}
 		},
+		pfglab3={
+			pfglab3_conf={
+				mdeps={
+					bundle=true,
+					glue=true
+				}
+			},
+			pfglab3_gen={
+				mdeps={
+					ffi=true,
+					glue=true,
+					pfglab3_conf=true,
+					rs232=true,
+					time=true
+				}
+			},
+			pfglab3_keygen={
+				mdeps={
+					ffi=true,
+					glue=true,
+					hmac=true,
+					sha2=true
+				}
+			}
+		},
 		pixman={
 		},
 		pmurhash={
@@ -1453,6 +1530,14 @@ return {
 				mdeps={
 					bit=true,
 					ffi=true
+				}
+			}
+		},
+		rs232={
+			rs232={
+				mdeps={
+					ffi=true,
+					fs=true
 				}
 			}
 		},
@@ -2062,17 +2147,110 @@ return {
 				mdeps={
 					amoeba=true,
 					box2d=true,
+					boxblur=true,
 					cairo=true,
 					color=true,
 					easing=true,
 					freetype=true,
 					fs=true,
-					gfonts=true,
 					glue=true,
-					libjpeg=true,
 					oo=true,
 					time=true,
 					tuple=true
+				}
+			},
+			ui_button={
+				mdeps={
+					glue=true,
+					ui=true
+				}
+			},
+			ui_calendar={
+				mdeps={
+					glue=true,
+					ui=true,
+					ui_grid=true
+				}
+			},
+			ui_colorpicker={
+				mdeps={
+					bitmap=true,
+					cairo=true,
+					color=true,
+					glue=true,
+					path2d_line=true,
+					ui=true
+				}
+			},
+			ui_dropdown={
+				mdeps={
+					glue=true,
+					ui=true,
+					ui_button=true,
+					ui_popup=true
+				}
+			},
+			ui_editbox={
+				mdeps={
+					codedit=true,
+					ffi=true,
+					glue=true,
+					ui=true
+				}
+			},
+			ui_grid={
+				mdeps={
+					box2d=true,
+					glue=true,
+					ui=true,
+					ui_scrollbox=true
+				}
+			},
+			ui_image={
+				mdeps={
+					ui=true
+				}
+			},
+			ui_menu={
+				mdeps={
+					ui=true
+				}
+			},
+			ui_popup={
+				mdeps={
+					glue=true,
+					ui=true
+				}
+			},
+			ui_progressbar={
+				mdeps={
+					ui=true
+				}
+			},
+			ui_scrollbox={
+				mdeps={
+					box2d=true,
+					glue=true,
+					ui=true
+				}
+			},
+			ui_slider={
+				mdeps={
+					box2d=true,
+					glue=true,
+					ui=true
+				}
+			},
+			ui_tablist={
+				mdeps={
+					glue=true,
+					ui=true
+				}
+			},
+			ui_zoomcalendar={
+				mdeps={
+					glue=true,
+					ui=true
 				}
 			}
 		},
@@ -2374,11 +2552,20 @@ return {
 		},
 		bundle={
 			bundle={
-				loaderr='./bundle.lua:5: not a module'
+				mdeps={
+					bundle_appversion=true,
+					ffi=true
+				}
 			},
 			bundle_loader={
 				mdeps={
 					ffi=true
+				}
+			},
+			bundle_luastate={
+				mdeps={
+					ffi=true,
+					luastate=true
 				}
 			}
 		},
@@ -2483,6 +2670,8 @@ return {
 				}
 			}
 		},
+		code={
+		},
 		codedit={
 			codedit={
 			}
@@ -2539,10 +2728,15 @@ return {
 			},
 			dasm_x64={
 				mdeps={
-					dasm_x86=true
+					dasm_x86x64=true
 				}
 			},
 			dasm_x86={
+				mdeps={
+					dasm_x86x64=true
+				}
+			},
+			dasm_x86x64={
 			},
 			dynasm={
 			}
@@ -2709,6 +2903,12 @@ return {
 				}
 			}
 		},
+		['fonts-awesome']={
+		},
+		['fonts-ionicons']={
+		},
+		['fonts-material-icons']={
+		},
 		freetype={
 			freetype={
 				ffi_deps={
@@ -2825,7 +3025,6 @@ return {
 		grid={
 			grid_band={
 				mdeps={
-					glue=true,
 					grid_band_layout=true
 				}
 			},
@@ -2982,6 +3181,11 @@ return {
 				mdeps={
 					bitmap=true,
 					ffi=true,
+					imgui=true
+				}
+			},
+			imgui_scrollbars={
+				mdeps={
 					imgui=true
 				}
 			}
@@ -3297,6 +3501,9 @@ return {
 		luaparser={
 			luaparser={
 				loaderr='./luaparser.lua:15: ./ljstr.lua:6: libljstr.so: cannot open shared object file: No such file or directory'
+			},
+			luaparser_lpeg={
+				loaderr='./luaparser_lpeg.lua:201: bad argument #2 to \'match\' (string expected, got nil)'
 			}
 		},
 		luapower={
@@ -3321,6 +3528,8 @@ return {
 		['luapower-ci']={
 		},
 		['luapower-repos']={
+		},
+		['luapower-repos-dev']={
 		},
 		luapower_db={
 			luapower_db={
@@ -3423,7 +3632,13 @@ return {
 		},
 		nanojpeg={
 			nanojpeg={
-				loaderr='./nanojpeg.lua:7: ./stdio.lua:190: cannot change a protected metatable'
+				ffi_deps={
+					nanojpeg2=true
+				},
+				mdeps={
+					ffi=true,
+					glue=true
+				}
 			}
 		},
 		nw={
@@ -3457,7 +3672,12 @@ return {
 		},
 		obj_parser={
 			obj_loader={
-				loaderr='./obj_loader.lua:8: ./stdio.lua:190: cannot change a protected metatable'
+				mdeps={
+					ffi=true,
+					glue=true,
+					obj_parser=true,
+					tuple=true
+				}
 			},
 			obj_parser={
 				mdeps={
@@ -3522,6 +3742,16 @@ return {
 				}
 			},
 			openvg_h={
+				mdeps={
+					ffi=true
+				}
+			}
+		},
+		opus={
+			opus={
+				loaderr='./opus.lua:7: libopus.so: cannot open shared object file: No such file or directory'
+			},
+			opus_h={
 				mdeps={
 					ffi=true
 				}
@@ -3665,6 +3895,31 @@ return {
 			path2d_text={
 			}
 		},
+		pfglab3={
+			pfglab3_conf={
+				mdeps={
+					bundle=true,
+					glue=true
+				}
+			},
+			pfglab3_gen={
+				mdeps={
+					ffi=true,
+					glue=true,
+					pfglab3_conf=true,
+					rs232=true,
+					time=true
+				}
+			},
+			pfglab3_keygen={
+				mdeps={
+					ffi=true,
+					glue=true,
+					hmac=true,
+					sha2=true
+				}
+			}
+		},
 		pixman={
 		},
 		pmurhash={
@@ -3711,6 +3966,14 @@ return {
 				mdeps={
 					bit=true,
 					ffi=true
+				}
+			}
+		},
+		rs232={
+			rs232={
+				mdeps={
+					ffi=true,
+					fs=true
 				}
 			}
 		},
@@ -3872,7 +4135,9 @@ return {
 		},
 		stdio={
 			stdio={
-				loaderr='./stdio.lua:190: cannot change a protected metatable'
+				mdeps={
+					ffi=true
+				}
 			}
 		},
 		struct={
@@ -4320,17 +4585,110 @@ return {
 				mdeps={
 					amoeba=true,
 					box2d=true,
+					boxblur=true,
 					cairo=true,
 					color=true,
 					easing=true,
 					freetype=true,
 					fs=true,
-					gfonts=true,
 					glue=true,
-					libjpeg=true,
 					oo=true,
 					time=true,
 					tuple=true
+				}
+			},
+			ui_button={
+				mdeps={
+					glue=true,
+					ui=true
+				}
+			},
+			ui_calendar={
+				mdeps={
+					glue=true,
+					ui=true,
+					ui_grid=true
+				}
+			},
+			ui_colorpicker={
+				mdeps={
+					bitmap=true,
+					cairo=true,
+					color=true,
+					glue=true,
+					path2d_line=true,
+					ui=true
+				}
+			},
+			ui_dropdown={
+				mdeps={
+					glue=true,
+					ui=true,
+					ui_button=true,
+					ui_popup=true
+				}
+			},
+			ui_editbox={
+				mdeps={
+					codedit=true,
+					ffi=true,
+					glue=true,
+					ui=true
+				}
+			},
+			ui_grid={
+				mdeps={
+					box2d=true,
+					glue=true,
+					ui=true,
+					ui_scrollbox=true
+				}
+			},
+			ui_image={
+				mdeps={
+					ui=true
+				}
+			},
+			ui_menu={
+				mdeps={
+					ui=true
+				}
+			},
+			ui_popup={
+				mdeps={
+					glue=true,
+					ui=true
+				}
+			},
+			ui_progressbar={
+				mdeps={
+					ui=true
+				}
+			},
+			ui_scrollbox={
+				mdeps={
+					box2d=true,
+					glue=true,
+					ui=true
+				}
+			},
+			ui_slider={
+				mdeps={
+					box2d=true,
+					glue=true,
+					ui=true
+				}
+			},
+			ui_tablist={
+				mdeps={
+					glue=true,
+					ui=true
+				}
+			},
+			ui_zoomcalendar={
+				mdeps={
+					glue=true,
+					ui=true
 				}
 			}
 		},
@@ -4653,11 +5011,20 @@ return {
 		},
 		bundle={
 			bundle={
-				loaderr='.\\bundle.lua:5: not a module'
+				mdeps={
+					bundle_appversion=true,
+					ffi=true
+				}
 			},
 			bundle_loader={
 				mdeps={
 					ffi=true
+				}
+			},
+			bundle_luastate={
+				mdeps={
+					ffi=true,
+					luastate=true
 				}
 			}
 		},
@@ -4776,6 +5143,8 @@ return {
 					ffi=true
 				}
 			}
+		},
+		code={
 		},
 		codedit={
 			codedit={
@@ -5096,10 +5465,15 @@ return {
 			},
 			dasm_x64={
 				mdeps={
-					dasm_x86=true
+					dasm_x86x64=true
 				}
 			},
 			dasm_x86={
+				mdeps={
+					dasm_x86x64=true
+				}
+			},
+			dasm_x86x64={
 			},
 			dynasm={
 			}
@@ -5262,6 +5636,12 @@ return {
 				}
 			}
 		},
+		['fonts-awesome']={
+		},
+		['fonts-ionicons']={
+		},
+		['fonts-material-icons']={
+		},
 		freetype={
 			freetype={
 				ffi_deps={
@@ -5297,7 +5677,11 @@ return {
 		},
 		fs={
 			fs={
-				loaderr='.\\fs.lua:19: cannot change a protected metatable'
+				mdeps={
+					ffi=true,
+					fs_common=true,
+					fs_win=true
+				}
 			},
 			fs_common={
 				mdeps={
@@ -5335,7 +5719,11 @@ return {
 		},
 		gfonts={
 			gfonts={
-				loaderr='.\\gfonts.lua:7: .\\fs.lua:19: cannot change a protected metatable'
+				mdeps={
+					fs=true,
+					glue=true,
+					pp=true
+				}
 			}
 		},
 		giflib={
@@ -5376,7 +5764,6 @@ return {
 		grid={
 			grid_band={
 				mdeps={
-					glue=true,
 					grid_band_layout=true
 				}
 			},
@@ -5535,11 +5922,23 @@ return {
 					ffi=true,
 					imgui=true
 				}
+			},
+			imgui_scrollbars={
+				mdeps={
+					imgui=true
+				}
 			}
 		},
 		imgui_nw_cairo={
 			imgui_nw_cairo={
-				loaderr='.\\imgui_nw_cairo.lua:12: .\\gfonts.lua:7: .\\fs.lua:19: cannot change a protected metatable'
+				mdeps={
+					cairo=true,
+					freetype=true,
+					gfonts=true,
+					imgui=true,
+					nw=true,
+					time=true
+				}
 			}
 		},
 		lanes={
@@ -5854,6 +6253,9 @@ return {
 		luaparser={
 			luaparser={
 				loaderr='.\\luaparser.lua:15: .\\ljstr.lua:6: cannot load module \'ljstr\': The specified module could not be found.'
+			},
+			luaparser_lpeg={
+				loaderr='.\\luaparser_lpeg.lua:201: bad argument #2 to \'match\' (string expected, got nil)'
 			}
 		},
 		luapower={
@@ -5878,6 +6280,8 @@ return {
 		['luapower-ci']={
 		},
 		['luapower-repos']={
+		},
+		['luapower-repos-dev']={
 		},
 		luapower_db={
 			luapower_db={
@@ -5985,8 +6389,7 @@ return {
 				},
 				mdeps={
 					ffi=true,
-					glue=true,
-					stdio=true
+					glue=true
 				}
 			}
 		},
@@ -6011,6 +6414,7 @@ return {
 					cbframe=true,
 					ffi=true,
 					glue=true,
+					time=true,
 					winapi=true,
 					['winapi.bitmap']=true,
 					['winapi.clipboard']=true,
@@ -6024,6 +6428,7 @@ return {
 					['winapi.gdi']=true,
 					['winapi.icon']=true,
 					['winapi.keyboard']=true,
+					['winapi.module']=true,
 					['winapi.monitor']=true,
 					['winapi.mouse']=true,
 					['winapi.notifyiconclass']=true,
@@ -6031,8 +6436,10 @@ return {
 					['winapi.rawinput']=true,
 					['winapi.shellapi']=true,
 					['winapi.spi']=true,
+					['winapi.sync']=true,
 					['winapi.sysinfo']=true,
 					['winapi.systemmetrics']=true,
+					['winapi.tooltipclass']=true,
 					['winapi.windowclass']=true
 				}
 			},
@@ -6046,7 +6453,6 @@ return {
 					ffi=true,
 					glue=true,
 					obj_parser=true,
-					stdio=true,
 					tuple=true
 				}
 			},
@@ -6122,6 +6528,16 @@ return {
 				}
 			},
 			openvg_h={
+				mdeps={
+					ffi=true
+				}
+			}
+		},
+		opus={
+			opus={
+				loaderr='.\\opus.lua:7: cannot load module \'opus\': The specified module could not be found.'
+			},
+			opus_h={
 				mdeps={
 					ffi=true
 				}
@@ -6265,6 +6681,31 @@ return {
 			path2d_text={
 			}
 		},
+		pfglab3={
+			pfglab3_conf={
+				mdeps={
+					bundle=true,
+					glue=true
+				}
+			},
+			pfglab3_gen={
+				mdeps={
+					ffi=true,
+					glue=true,
+					pfglab3_conf=true,
+					rs232=true,
+					time=true
+				}
+			},
+			pfglab3_keygen={
+				mdeps={
+					ffi=true,
+					glue=true,
+					hmac=true,
+					sha2=true
+				}
+			}
+		},
 		pixman={
 		},
 		pmurhash={
@@ -6317,6 +6758,14 @@ return {
 				mdeps={
 					bit=true,
 					ffi=true
+				}
+			}
+		},
+		rs232={
+			rs232={
+				mdeps={
+					ffi=true,
+					fs=true
 				}
 			}
 		},
@@ -6583,7 +7032,114 @@ return {
 		},
 		ui={
 			ui={
-				loaderr='.\\ui.lua:15: .\\gfonts.lua:7: .\\fs.lua:19: cannot change a protected metatable'
+				mdeps={
+					amoeba=true,
+					box2d=true,
+					boxblur=true,
+					cairo=true,
+					color=true,
+					easing=true,
+					freetype=true,
+					fs=true,
+					glue=true,
+					oo=true,
+					time=true,
+					tuple=true
+				}
+			},
+			ui_button={
+				mdeps={
+					glue=true,
+					ui=true
+				}
+			},
+			ui_calendar={
+				mdeps={
+					glue=true,
+					ui=true,
+					ui_grid=true
+				}
+			},
+			ui_colorpicker={
+				mdeps={
+					bitmap=true,
+					cairo=true,
+					color=true,
+					glue=true,
+					path2d_line=true,
+					ui=true
+				}
+			},
+			ui_dropdown={
+				mdeps={
+					glue=true,
+					ui=true,
+					ui_button=true,
+					ui_popup=true
+				}
+			},
+			ui_editbox={
+				mdeps={
+					codedit=true,
+					ffi=true,
+					glue=true,
+					ui=true
+				}
+			},
+			ui_grid={
+				mdeps={
+					box2d=true,
+					glue=true,
+					ui=true,
+					ui_scrollbox=true
+				}
+			},
+			ui_image={
+				mdeps={
+					ui=true
+				}
+			},
+			ui_menu={
+				mdeps={
+					ui=true
+				}
+			},
+			ui_popup={
+				mdeps={
+					glue=true,
+					ui=true
+				}
+			},
+			ui_progressbar={
+				mdeps={
+					ui=true
+				}
+			},
+			ui_scrollbox={
+				mdeps={
+					box2d=true,
+					glue=true,
+					ui=true
+				}
+			},
+			ui_slider={
+				mdeps={
+					box2d=true,
+					glue=true,
+					ui=true
+				}
+			},
+			ui_tablist={
+				mdeps={
+					glue=true,
+					ui=true
+				}
+			},
+			ui_zoomcalendar={
+				mdeps={
+					glue=true,
+					ui=true
+				}
 			}
 		},
 		unit={
@@ -7225,6 +7781,12 @@ return {
 					['winapi.util']=true
 				}
 			},
+			['winapi.sync']={
+				mdeps={
+					winapi=true,
+					['winapi.winbase']=true
+				}
+			},
 			['winapi.sysinfo']={
 				mdeps={
 					winapi=true
@@ -7272,7 +7834,17 @@ return {
 			},
 			['winapi.tooltip']={
 				mdeps={
-					winapi=true
+					winapi=true,
+					['winapi.comctl']=true,
+					['winapi.window']=true
+				}
+			},
+			['winapi.tooltipclass']={
+				mdeps={
+					winapi=true,
+					['winapi.basewindowclass']=true,
+					['winapi.controlclass']=true,
+					['winapi.tooltip']=true
 				}
 			},
 			['winapi.treeview']={
@@ -7306,6 +7878,11 @@ return {
 				mdeps={
 					winapi=true,
 					['winapi.object']=true
+				}
+			},
+			['winapi.volman']={
+				mdeps={
+					winapi=true
 				}
 			},
 			['winapi.waitemlistclass']={
@@ -7588,11 +8165,20 @@ return {
 		},
 		bundle={
 			bundle={
-				loaderr='.\\bundle.lua:5: not a module'
+				mdeps={
+					bundle_appversion=true,
+					ffi=true
+				}
 			},
 			bundle_loader={
 				mdeps={
 					ffi=true
+				}
+			},
+			bundle_luastate={
+				mdeps={
+					ffi=true,
+					luastate=true
 				}
 			}
 		},
@@ -7711,6 +8297,8 @@ return {
 					ffi=true
 				}
 			}
+		},
+		code={
 		},
 		codedit={
 			codedit={
@@ -8031,10 +8619,15 @@ return {
 			},
 			dasm_x64={
 				mdeps={
-					dasm_x86=true
+					dasm_x86x64=true
 				}
 			},
 			dasm_x86={
+				mdeps={
+					dasm_x86x64=true
+				}
+			},
+			dasm_x86x64={
 			},
 			dynasm={
 			}
@@ -8197,6 +8790,12 @@ return {
 				}
 			}
 		},
+		['fonts-awesome']={
+		},
+		['fonts-ionicons']={
+		},
+		['fonts-material-icons']={
+		},
 		freetype={
 			freetype={
 				ffi_deps={
@@ -8232,7 +8831,11 @@ return {
 		},
 		fs={
 			fs={
-				loaderr='.\\fs.lua:19: cannot change a protected metatable'
+				mdeps={
+					ffi=true,
+					fs_common=true,
+					fs_win=true
+				}
 			},
 			fs_common={
 				mdeps={
@@ -8270,7 +8873,11 @@ return {
 		},
 		gfonts={
 			gfonts={
-				loaderr='.\\gfonts.lua:7: .\\fs.lua:19: cannot change a protected metatable'
+				mdeps={
+					fs=true,
+					glue=true,
+					pp=true
+				}
 			}
 		},
 		giflib={
@@ -8311,7 +8918,6 @@ return {
 		grid={
 			grid_band={
 				mdeps={
-					glue=true,
 					grid_band_layout=true
 				}
 			},
@@ -8470,11 +9076,23 @@ return {
 					ffi=true,
 					imgui=true
 				}
+			},
+			imgui_scrollbars={
+				mdeps={
+					imgui=true
+				}
 			}
 		},
 		imgui_nw_cairo={
 			imgui_nw_cairo={
-				loaderr='.\\imgui_nw_cairo.lua:12: .\\gfonts.lua:7: .\\fs.lua:19: cannot change a protected metatable'
+				mdeps={
+					cairo=true,
+					freetype=true,
+					gfonts=true,
+					imgui=true,
+					nw=true,
+					time=true
+				}
 			}
 		},
 		lanes={
@@ -8601,7 +9219,12 @@ return {
 		},
 		librsync={
 			librsync={
-				loaderr='.\\librsync.lua:8: cannot load module \'rsync\': The specified module could not be found.'
+				ffi_deps={
+					rsync=true
+				},
+				mdeps={
+					ffi=true
+				}
 			}
 		},
 		libsodium={
@@ -8820,6 +9443,9 @@ return {
 					pp=true,
 					strict=true
 				}
+			},
+			luaparser_lpeg={
+				loaderr='.\\luaparser_lpeg.lua:201: bad argument #2 to \'match\' (string expected, got nil)'
 			}
 		},
 		luapower={
@@ -8844,6 +9470,8 @@ return {
 		['luapower-ci']={
 		},
 		['luapower-repos']={
+		},
+		['luapower-repos-dev']={
 		},
 		luapower_db={
 			luapower_db={
@@ -8956,8 +9584,7 @@ return {
 				},
 				mdeps={
 					ffi=true,
-					glue=true,
-					stdio=true
+					glue=true
 				}
 			}
 		},
@@ -8982,6 +9609,7 @@ return {
 					cbframe=true,
 					ffi=true,
 					glue=true,
+					time=true,
 					winapi=true,
 					['winapi.bitmap']=true,
 					['winapi.clipboard']=true,
@@ -8995,6 +9623,7 @@ return {
 					['winapi.gdi']=true,
 					['winapi.icon']=true,
 					['winapi.keyboard']=true,
+					['winapi.module']=true,
 					['winapi.monitor']=true,
 					['winapi.mouse']=true,
 					['winapi.notifyiconclass']=true,
@@ -9002,8 +9631,10 @@ return {
 					['winapi.rawinput']=true,
 					['winapi.shellapi']=true,
 					['winapi.spi']=true,
+					['winapi.sync']=true,
 					['winapi.sysinfo']=true,
 					['winapi.systemmetrics']=true,
+					['winapi.tooltipclass']=true,
 					['winapi.windowclass']=true
 				}
 			},
@@ -9017,7 +9648,6 @@ return {
 					ffi=true,
 					glue=true,
 					obj_parser=true,
-					stdio=true,
 					tuple=true
 				}
 			},
@@ -9093,6 +9723,16 @@ return {
 				}
 			},
 			openvg_h={
+				mdeps={
+					ffi=true
+				}
+			}
+		},
+		opus={
+			opus={
+				loaderr='.\\opus.lua:7: cannot load module \'opus\': The specified module could not be found.'
+			},
+			opus_h={
 				mdeps={
 					ffi=true
 				}
@@ -9236,6 +9876,31 @@ return {
 			path2d_text={
 			}
 		},
+		pfglab3={
+			pfglab3_conf={
+				mdeps={
+					bundle=true,
+					glue=true
+				}
+			},
+			pfglab3_gen={
+				mdeps={
+					ffi=true,
+					glue=true,
+					pfglab3_conf=true,
+					rs232=true,
+					time=true
+				}
+			},
+			pfglab3_keygen={
+				mdeps={
+					ffi=true,
+					glue=true,
+					hmac=true,
+					sha2=true
+				}
+			}
+		},
 		pixman={
 		},
 		pmurhash={
@@ -9288,6 +9953,14 @@ return {
 				mdeps={
 					bit=true,
 					ffi=true
+				}
+			}
+		},
+		rs232={
+			rs232={
+				mdeps={
+					ffi=true,
+					fs=true
 				}
 			}
 		},
@@ -9554,7 +10227,114 @@ return {
 		},
 		ui={
 			ui={
-				loaderr='.\\ui.lua:15: .\\gfonts.lua:7: .\\fs.lua:19: cannot change a protected metatable'
+				mdeps={
+					amoeba=true,
+					box2d=true,
+					boxblur=true,
+					cairo=true,
+					color=true,
+					easing=true,
+					freetype=true,
+					fs=true,
+					glue=true,
+					oo=true,
+					time=true,
+					tuple=true
+				}
+			},
+			ui_button={
+				mdeps={
+					glue=true,
+					ui=true
+				}
+			},
+			ui_calendar={
+				mdeps={
+					glue=true,
+					ui=true,
+					ui_grid=true
+				}
+			},
+			ui_colorpicker={
+				mdeps={
+					bitmap=true,
+					cairo=true,
+					color=true,
+					glue=true,
+					path2d_line=true,
+					ui=true
+				}
+			},
+			ui_dropdown={
+				mdeps={
+					glue=true,
+					ui=true,
+					ui_button=true,
+					ui_popup=true
+				}
+			},
+			ui_editbox={
+				mdeps={
+					codedit=true,
+					ffi=true,
+					glue=true,
+					ui=true
+				}
+			},
+			ui_grid={
+				mdeps={
+					box2d=true,
+					glue=true,
+					ui=true,
+					ui_scrollbox=true
+				}
+			},
+			ui_image={
+				mdeps={
+					ui=true
+				}
+			},
+			ui_menu={
+				mdeps={
+					ui=true
+				}
+			},
+			ui_popup={
+				mdeps={
+					glue=true,
+					ui=true
+				}
+			},
+			ui_progressbar={
+				mdeps={
+					ui=true
+				}
+			},
+			ui_scrollbox={
+				mdeps={
+					box2d=true,
+					glue=true,
+					ui=true
+				}
+			},
+			ui_slider={
+				mdeps={
+					box2d=true,
+					glue=true,
+					ui=true
+				}
+			},
+			ui_tablist={
+				mdeps={
+					glue=true,
+					ui=true
+				}
+			},
+			ui_zoomcalendar={
+				mdeps={
+					glue=true,
+					ui=true
+				}
 			}
 		},
 		unit={
@@ -10196,6 +10976,12 @@ return {
 					['winapi.util']=true
 				}
 			},
+			['winapi.sync']={
+				mdeps={
+					winapi=true,
+					['winapi.winbase']=true
+				}
+			},
 			['winapi.sysinfo']={
 				mdeps={
 					winapi=true
@@ -10243,7 +11029,17 @@ return {
 			},
 			['winapi.tooltip']={
 				mdeps={
-					winapi=true
+					winapi=true,
+					['winapi.comctl']=true,
+					['winapi.window']=true
+				}
+			},
+			['winapi.tooltipclass']={
+				mdeps={
+					winapi=true,
+					['winapi.basewindowclass']=true,
+					['winapi.controlclass']=true,
+					['winapi.tooltip']=true
 				}
 			},
 			['winapi.treeview']={
@@ -10277,6 +11073,11 @@ return {
 				mdeps={
 					winapi=true,
 					['winapi.object']=true
+				}
+			},
+			['winapi.volman']={
+				mdeps={
+					winapi=true
 				}
 			},
 			['winapi.waitemlistclass']={
@@ -10544,11 +11345,20 @@ return {
 		},
 		bundle={
 			bundle={
-				loaderr='./bundle.lua:5: not a module'
+				mdeps={
+					bundle_appversion=true,
+					ffi=true
+				}
 			},
 			bundle_loader={
 				mdeps={
 					ffi=true
+				}
+			},
+			bundle_luastate={
+				mdeps={
+					ffi=true,
+					luastate=true
 				}
 			}
 		},
@@ -10665,6 +11475,8 @@ return {
 				}
 			}
 		},
+		code={
+		},
 		codedit={
 			codedit={
 			}
@@ -10721,10 +11533,15 @@ return {
 			},
 			dasm_x64={
 				mdeps={
-					dasm_x86=true
+					dasm_x86x64=true
 				}
 			},
 			dasm_x86={
+				mdeps={
+					dasm_x86x64=true
+				}
+			},
+			dasm_x86x64={
 			},
 			dynasm={
 			}
@@ -10887,6 +11704,12 @@ return {
 				}
 			}
 		},
+		['fonts-awesome']={
+		},
+		['fonts-ionicons']={
+		},
+		['fonts-material-icons']={
+		},
 		freetype={
 			freetype={
 				ffi_deps={
@@ -10922,7 +11745,11 @@ return {
 		},
 		fs={
 			fs={
-				loaderr='./fs.lua:19: cannot change a protected metatable'
+				mdeps={
+					ffi=true,
+					fs_common=true,
+					fs_posix=true
+				}
 			},
 			fs_common={
 				mdeps={
@@ -10960,7 +11787,11 @@ return {
 		},
 		gfonts={
 			gfonts={
-				loaderr='./gfonts.lua:7: ./fs.lua:19: cannot change a protected metatable'
+				mdeps={
+					fs=true,
+					glue=true,
+					pp=true
+				}
 			}
 		},
 		giflib={
@@ -10992,7 +11823,6 @@ return {
 		grid={
 			grid_band={
 				mdeps={
-					glue=true,
 					grid_band_layout=true
 				}
 			},
@@ -11151,11 +11981,23 @@ return {
 					ffi=true,
 					imgui=true
 				}
+			},
+			imgui_scrollbars={
+				mdeps={
+					imgui=true
+				}
 			}
 		},
 		imgui_nw_cairo={
 			imgui_nw_cairo={
-				loaderr='./imgui_nw_cairo.lua:12: ./gfonts.lua:7: ./fs.lua:19: cannot change a protected metatable'
+				mdeps={
+					cairo=true,
+					freetype=true,
+					gfonts=true,
+					imgui=true,
+					nw=true,
+					time=true
+				}
 			}
 		},
 		lanes={
@@ -11470,6 +12312,9 @@ return {
 		luaparser={
 			luaparser={
 				loaderr='./luaparser.lua:15: ./ljstr.lua:6: dlopen(libljstr.dylib, 5): image not found'
+			},
+			luaparser_lpeg={
+				loaderr='./luaparser_lpeg.lua:201: bad argument #2 to \'match\' (string expected, got nil)'
 			}
 		},
 		luapower={
@@ -11494,6 +12339,8 @@ return {
 		['luapower-ci']={
 		},
 		['luapower-repos']={
+		},
+		['luapower-repos-dev']={
 		},
 		luapower_db={
 			luapower_db={
@@ -11601,8 +12448,7 @@ return {
 				},
 				mdeps={
 					ffi=true,
-					glue=true,
-					stdio=true
+					glue=true
 				}
 			}
 		},
@@ -11623,6 +12469,8 @@ return {
 					['/System/Library/Frameworks/ApplicationServices.framework/Versions/Current/Frameworks/CoreGraphics.framework/CoreGraphics']=true,
 					['/System/Library/Frameworks/ApplicationServices.framework/Versions/Current/Frameworks/CoreGraphics.framework/Resources/BridgeSupport/CoreGraphics.dylib']=true,
 					['/System/Library/Frameworks/Carbon.framework/Versions/Current/Frameworks/HIToolbox.framework/HIToolbox']=true,
+					['/System/Library/Frameworks/CoreFoundation.framework/CoreFoundation']=true,
+					['/System/Library/Frameworks/CoreFoundation.framework/Resources/BridgeSupport/CoreFoundation.dylib']=true,
 					['/System/Library/Frameworks/Foundation.framework/Foundation']=true,
 					['/System/Library/Frameworks/Foundation.framework/Resources/BridgeSupport/Foundation.dylib']=true
 				},
@@ -11648,7 +12496,6 @@ return {
 					ffi=true,
 					glue=true,
 					obj_parser=true,
-					stdio=true,
 					tuple=true
 				}
 			},
@@ -11738,6 +12585,16 @@ return {
 				}
 			},
 			openvg_h={
+				mdeps={
+					ffi=true
+				}
+			}
+		},
+		opus={
+			opus={
+				loaderr='./opus.lua:7: dlopen(libopus.dylib, 5): image not found'
+			},
+			opus_h={
 				mdeps={
 					ffi=true
 				}
@@ -11881,6 +12738,31 @@ return {
 			path2d_text={
 			}
 		},
+		pfglab3={
+			pfglab3_conf={
+				mdeps={
+					bundle=true,
+					glue=true
+				}
+			},
+			pfglab3_gen={
+				mdeps={
+					ffi=true,
+					glue=true,
+					pfglab3_conf=true,
+					rs232=true,
+					time=true
+				}
+			},
+			pfglab3_keygen={
+				mdeps={
+					ffi=true,
+					glue=true,
+					hmac=true,
+					sha2=true
+				}
+			}
+		},
 		pixman={
 		},
 		pmurhash={
@@ -11927,6 +12809,14 @@ return {
 				mdeps={
 					bit=true,
 					ffi=true
+				}
+			}
+		},
+		rs232={
+			rs232={
+				mdeps={
+					ffi=true,
+					fs=true
 				}
 			}
 		},
@@ -12530,7 +13420,114 @@ return {
 		},
 		ui={
 			ui={
-				loaderr='./ui.lua:15: ./gfonts.lua:7: ./fs.lua:19: cannot change a protected metatable'
+				mdeps={
+					amoeba=true,
+					box2d=true,
+					boxblur=true,
+					cairo=true,
+					color=true,
+					easing=true,
+					freetype=true,
+					fs=true,
+					glue=true,
+					oo=true,
+					time=true,
+					tuple=true
+				}
+			},
+			ui_button={
+				mdeps={
+					glue=true,
+					ui=true
+				}
+			},
+			ui_calendar={
+				mdeps={
+					glue=true,
+					ui=true,
+					ui_grid=true
+				}
+			},
+			ui_colorpicker={
+				mdeps={
+					bitmap=true,
+					cairo=true,
+					color=true,
+					glue=true,
+					path2d_line=true,
+					ui=true
+				}
+			},
+			ui_dropdown={
+				mdeps={
+					glue=true,
+					ui=true,
+					ui_button=true,
+					ui_popup=true
+				}
+			},
+			ui_editbox={
+				mdeps={
+					codedit=true,
+					ffi=true,
+					glue=true,
+					ui=true
+				}
+			},
+			ui_grid={
+				mdeps={
+					box2d=true,
+					glue=true,
+					ui=true,
+					ui_scrollbox=true
+				}
+			},
+			ui_image={
+				mdeps={
+					ui=true
+				}
+			},
+			ui_menu={
+				mdeps={
+					ui=true
+				}
+			},
+			ui_popup={
+				mdeps={
+					glue=true,
+					ui=true
+				}
+			},
+			ui_progressbar={
+				mdeps={
+					ui=true
+				}
+			},
+			ui_scrollbox={
+				mdeps={
+					box2d=true,
+					glue=true,
+					ui=true
+				}
+			},
+			ui_slider={
+				mdeps={
+					box2d=true,
+					glue=true,
+					ui=true
+				}
+			},
+			ui_tablist={
+				mdeps={
+					glue=true,
+					ui=true
+				}
+			},
+			ui_zoomcalendar={
+				mdeps={
+					glue=true,
+					ui=true
+				}
 			}
 		},
 		unit={
@@ -12579,8 +13576,6 @@ return {
 			videoinput_cocoa={
 				ffi_deps={
 					['/System/Library/Frameworks/AVFoundation.framework/AVFoundation']=true,
-					['/System/Library/Frameworks/CoreFoundation.framework/CoreFoundation']=true,
-					['/System/Library/Frameworks/CoreFoundation.framework/Resources/BridgeSupport/CoreFoundation.dylib']=true,
 					['/System/Library/Frameworks/CoreMedia.framework/CoreMedia']=true,
 					['/System/Library/Frameworks/CoreVideo.framework/CoreVideo']=true
 				},
@@ -12786,11 +13781,20 @@ return {
 		},
 		bundle={
 			bundle={
-				loaderr='./bundle.lua:5: not a module'
+				mdeps={
+					bundle_appversion=true,
+					ffi=true
+				}
 			},
 			bundle_loader={
 				mdeps={
 					ffi=true
+				}
+			},
+			bundle_luastate={
+				mdeps={
+					ffi=true,
+					luastate=true
 				}
 			}
 		},
@@ -12907,6 +13911,8 @@ return {
 				}
 			}
 		},
+		code={
+		},
 		codedit={
 			codedit={
 			}
@@ -12963,10 +13969,15 @@ return {
 			},
 			dasm_x64={
 				mdeps={
-					dasm_x86=true
+					dasm_x86x64=true
 				}
 			},
 			dasm_x86={
+				mdeps={
+					dasm_x86x64=true
+				}
+			},
+			dasm_x86x64={
 			},
 			dynasm={
 			}
@@ -13129,6 +14140,12 @@ return {
 				}
 			}
 		},
+		['fonts-awesome']={
+		},
+		['fonts-ionicons']={
+		},
+		['fonts-material-icons']={
+		},
 		freetype={
 			freetype={
 				ffi_deps={
@@ -13164,7 +14181,11 @@ return {
 		},
 		fs={
 			fs={
-				loaderr='./fs.lua:19: cannot change a protected metatable'
+				mdeps={
+					ffi=true,
+					fs_common=true,
+					fs_posix=true
+				}
 			},
 			fs_common={
 				mdeps={
@@ -13202,7 +14223,11 @@ return {
 		},
 		gfonts={
 			gfonts={
-				loaderr='./gfonts.lua:7: ./fs.lua:19: cannot change a protected metatable'
+				mdeps={
+					fs=true,
+					glue=true,
+					pp=true
+				}
 			}
 		},
 		giflib={
@@ -13234,7 +14259,6 @@ return {
 		grid={
 			grid_band={
 				mdeps={
-					glue=true,
 					grid_band_layout=true
 				}
 			},
@@ -13393,11 +14417,23 @@ return {
 					ffi=true,
 					imgui=true
 				}
+			},
+			imgui_scrollbars={
+				mdeps={
+					imgui=true
+				}
 			}
 		},
 		imgui_nw_cairo={
 			imgui_nw_cairo={
-				loaderr='./imgui_nw_cairo.lua:12: ./gfonts.lua:7: ./fs.lua:19: cannot change a protected metatable'
+				mdeps={
+					cairo=true,
+					freetype=true,
+					gfonts=true,
+					imgui=true,
+					nw=true,
+					time=true
+				}
 			}
 		},
 		lanes={
@@ -13712,6 +14748,9 @@ return {
 		luaparser={
 			luaparser={
 				loaderr='./luaparser.lua:15: ./ljstr.lua:6: dlopen(libljstr.dylib, 5): image not found'
+			},
+			luaparser_lpeg={
+				loaderr='./luaparser_lpeg.lua:201: bad argument #2 to \'match\' (string expected, got nil)'
 			}
 		},
 		luapower={
@@ -13736,6 +14775,8 @@ return {
 		['luapower-ci']={
 		},
 		['luapower-repos']={
+		},
+		['luapower-repos-dev']={
 		},
 		luapower_db={
 			luapower_db={
@@ -13843,8 +14884,7 @@ return {
 				},
 				mdeps={
 					ffi=true,
-					glue=true,
-					stdio=true
+					glue=true
 				}
 			}
 		},
@@ -13865,6 +14905,8 @@ return {
 					['/System/Library/Frameworks/ApplicationServices.framework/Versions/Current/Frameworks/CoreGraphics.framework/CoreGraphics']=true,
 					['/System/Library/Frameworks/ApplicationServices.framework/Versions/Current/Frameworks/CoreGraphics.framework/Resources/BridgeSupport/CoreGraphics.dylib']=true,
 					['/System/Library/Frameworks/Carbon.framework/Versions/Current/Frameworks/HIToolbox.framework/HIToolbox']=true,
+					['/System/Library/Frameworks/CoreFoundation.framework/CoreFoundation']=true,
+					['/System/Library/Frameworks/CoreFoundation.framework/Resources/BridgeSupport/CoreFoundation.dylib']=true,
 					['/System/Library/Frameworks/Foundation.framework/Foundation']=true,
 					['/System/Library/Frameworks/Foundation.framework/Resources/BridgeSupport/Foundation.dylib']=true
 				},
@@ -13890,7 +14932,6 @@ return {
 					ffi=true,
 					glue=true,
 					obj_parser=true,
-					stdio=true,
 					tuple=true
 				}
 			},
@@ -13980,6 +15021,16 @@ return {
 				}
 			},
 			openvg_h={
+				mdeps={
+					ffi=true
+				}
+			}
+		},
+		opus={
+			opus={
+				loaderr='./opus.lua:7: dlopen(libopus.dylib, 5): image not found'
+			},
+			opus_h={
 				mdeps={
 					ffi=true
 				}
@@ -14123,6 +15174,31 @@ return {
 			path2d_text={
 			}
 		},
+		pfglab3={
+			pfglab3_conf={
+				mdeps={
+					bundle=true,
+					glue=true
+				}
+			},
+			pfglab3_gen={
+				mdeps={
+					ffi=true,
+					glue=true,
+					pfglab3_conf=true,
+					rs232=true,
+					time=true
+				}
+			},
+			pfglab3_keygen={
+				mdeps={
+					ffi=true,
+					glue=true,
+					hmac=true,
+					sha2=true
+				}
+			}
+		},
 		pixman={
 		},
 		pmurhash={
@@ -14169,6 +15245,14 @@ return {
 				mdeps={
 					bit=true,
 					ffi=true
+				}
+			}
+		},
+		rs232={
+			rs232={
+				mdeps={
+					ffi=true,
+					fs=true
 				}
 			}
 		},
@@ -14772,7 +15856,114 @@ return {
 		},
 		ui={
 			ui={
-				loaderr='./ui.lua:15: ./gfonts.lua:7: ./fs.lua:19: cannot change a protected metatable'
+				mdeps={
+					amoeba=true,
+					box2d=true,
+					boxblur=true,
+					cairo=true,
+					color=true,
+					easing=true,
+					freetype=true,
+					fs=true,
+					glue=true,
+					oo=true,
+					time=true,
+					tuple=true
+				}
+			},
+			ui_button={
+				mdeps={
+					glue=true,
+					ui=true
+				}
+			},
+			ui_calendar={
+				mdeps={
+					glue=true,
+					ui=true,
+					ui_grid=true
+				}
+			},
+			ui_colorpicker={
+				mdeps={
+					bitmap=true,
+					cairo=true,
+					color=true,
+					glue=true,
+					path2d_line=true,
+					ui=true
+				}
+			},
+			ui_dropdown={
+				mdeps={
+					glue=true,
+					ui=true,
+					ui_button=true,
+					ui_popup=true
+				}
+			},
+			ui_editbox={
+				mdeps={
+					codedit=true,
+					ffi=true,
+					glue=true,
+					ui=true
+				}
+			},
+			ui_grid={
+				mdeps={
+					box2d=true,
+					glue=true,
+					ui=true,
+					ui_scrollbox=true
+				}
+			},
+			ui_image={
+				mdeps={
+					ui=true
+				}
+			},
+			ui_menu={
+				mdeps={
+					ui=true
+				}
+			},
+			ui_popup={
+				mdeps={
+					glue=true,
+					ui=true
+				}
+			},
+			ui_progressbar={
+				mdeps={
+					ui=true
+				}
+			},
+			ui_scrollbox={
+				mdeps={
+					box2d=true,
+					glue=true,
+					ui=true
+				}
+			},
+			ui_slider={
+				mdeps={
+					box2d=true,
+					glue=true,
+					ui=true
+				}
+			},
+			ui_tablist={
+				mdeps={
+					glue=true,
+					ui=true
+				}
+			},
+			ui_zoomcalendar={
+				mdeps={
+					glue=true,
+					ui=true
+				}
 			}
 		},
 		unit={
@@ -14821,8 +16012,6 @@ return {
 			videoinput_cocoa={
 				ffi_deps={
 					['/System/Library/Frameworks/AVFoundation.framework/AVFoundation']=true,
-					['/System/Library/Frameworks/CoreFoundation.framework/CoreFoundation']=true,
-					['/System/Library/Frameworks/CoreFoundation.framework/Resources/BridgeSupport/CoreFoundation.dylib']=true,
 					['/System/Library/Frameworks/CoreMedia.framework/CoreMedia']=true,
 					['/System/Library/Frameworks/CoreVideo.framework/CoreVideo']=true
 				},
