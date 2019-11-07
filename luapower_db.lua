@@ -1622,27 +1622,90 @@ return {
 			},
 			terra={
 			},
+			['terra.parsing']={
+			},
+			['terra.std']={
+			},
 			terralib={
 			},
 			terralib_luapower={
 			}
 		},
 		['terra-arrayfreelist']={
+			['terra.arrayfreelist']={
+				autoloads={
+					arr='terra/dynarray',
+					arrview='terra/arrayview',
+					random='terra/random',
+					randomseed='terra/random',
+					set='terra/hashmap'
+				},
+				mdeps={
+					['terra.low']=true
+				}
+			}
 		},
 		['terra-arrayview']={
+			['terra.arrayview']={
+				autoloads={
+					arr='terra/dynarray',
+					arrview='terra/arrayview',
+					random='terra/random',
+					randomseed='terra/random',
+					set='terra/hashmap'
+				},
+				mdeps={
+					['terra.low']=true
+				}
+			},
+			['terra.rawstringview']={
+				autoloads={
+					arrview='terra/arrayview',
+					random='terra/random',
+					randomseed='terra/random',
+					set='terra/hashmap'
+				},
+				mdeps={
+					['terra.dynarray']=true,
+					['terra.low']=true
+				}
+			}
 		},
 		['terra-binder']={
 			['terra.binder']={
 				mdeps={
-					['terra/low']=true
+					['terra.low']=true
 				}
 			}
 		},
 		['terra-bitarray']={
+			['terra.bitarray']={
+				mdeps={
+					['terra.box2d']=true,
+					['terra.low']=true
+				}
+			}
 		},
 		['terra-bitmap']={
+			['terra.bitmap']={
+				mdeps={
+					['terra.low']=true
+				}
+			}
 		},
 		['terra-box2d']={
+			['terra.box2d']={
+				autoloads={
+					arr='terra/dynarray',
+					arrview='terra/arrayview',
+					random='terra/random',
+					randomseed='terra/random',
+					set='terra/hashmap'
+				},
+				mdeps={
+					['terra.low']=true
+				}
+			}
 		},
 		['terra-boxblur']={
 			boxblurlib_h={
@@ -1652,15 +1715,65 @@ return {
 				mdeps={
 					ffi=true
 				}
+			},
+			['terra.boxblur']={
+				autoloads={
+					arrview='terra/arrayview',
+					random='terra/random',
+					randomseed='terra/random',
+					set='terra/hashmap'
+				},
+				mdeps={
+					['terra.bitmap']=true,
+					['terra.low']=true
+				}
 			}
 		},
 		['terra-cairo']={
+			['terra.cairo']={
+				loaderr='.\\terra/low.t:479: attempt to index local \'T\' (a nil value)'
+			}
 		},
 		['terra-dynarray']={
+			['terra.dynarray']={
+				autoloads={
+					arrview='terra/arrayview',
+					random='terra/random',
+					randomseed='terra/random',
+					set='terra/hashmap'
+				},
+				mdeps={
+					['terra.arrayview']=true,
+					['terra.low']=true
+				}
+			}
 		},
 		['terra-fixedfreelist']={
+			['terra.fixedfreelist']={
+				autoloads={
+					arr='terra/dynarray',
+					arrview='terra/arrayview',
+					random='terra/random',
+					randomseed='terra/random',
+					set='terra/hashmap'
+				},
+				mdeps={
+					['terra.low']=true
+				}
+			}
 		},
 		['terra-hashmap']={
+			['terra.hashmap']={
+				autoloads={
+					arrview='terra/arrayview',
+					random='terra/random',
+					randomseed='terra/random',
+					set='terra/hashmap'
+				},
+				mdeps={
+					['terra.low']=true
+				}
+			}
 		},
 		['terra-layer']={
 			layer={
@@ -1703,23 +1816,180 @@ return {
 			['layer_test.layer_test_state_todo']={
 			},
 			layer_test_state={
+			},
+			['terra.layer']={
+				loaderr='.\\terra/low.t:73: .\\terra/low.t:479: attempt to index local \'T\' (a nil value)'
+			},
+			['terra.layer_api']={
+				loaderr='.\\terra/layer_api.t:42: .\\terra/low.t:73: .\\terra/low.t:479: attempt to index local \'T\' (a nil value)'
 			}
 		},
 		['terra-linkedlist']={
+			['terra.linkedlist']={
+				autoloads={
+					arrview='terra/arrayview',
+					random='terra/random',
+					randomseed='terra/random',
+					set='terra/hashmap'
+				},
+				mdeps={
+					['terra.low']=true
+				}
+			}
 		},
 		['terra-low']={
+			['terra.low']={
+				autoloads={
+					arr='terra/dynarray',
+					arrview='terra/arrayview',
+					random='terra/random',
+					randomseed='terra/random',
+					set='terra/hashmap'
+				},
+				mdeps={
+					ffi=true,
+					glue=true,
+					['jit.zone']=true,
+					pp=true
+				}
+			},
+			['terra.memcheck']={
+				autoloads={
+					arr='terra/dynarray',
+					arrview='terra/arrayview',
+					random='terra/random',
+					randomseed='terra/random',
+					set='terra/hashmap'
+				},
+				mdeps={
+					['terra.hashmap']=true,
+					['terra.low']=true
+				}
+			}
 		},
 		['terra-lrucache']={
+			['terra.lrucache']={
+				autoloads={
+					arrview='terra/arrayview',
+					random='terra/random',
+					randomseed='terra/random',
+					set='terra/hashmap'
+				},
+				mdeps={
+					['terra.linkedlist']=true,
+					['terra.low']=true
+				}
+			}
 		},
 		['terra-oo']={
+			['terra.oo']={
+				mdeps={
+					['terra.low']=true
+				}
+			}
 		},
 		['terra-phf']={
+			['terra.phf']={
+				autoloads={
+					arr='terra/dynarray',
+					arrview='terra/arrayview',
+					random='terra/random',
+					randomseed='terra/random',
+					set='terra/hashmap'
+				},
+				mdeps={
+					['terra.low']=true
+				}
+			}
 		},
 		['terra-random']={
+			['terra.random']={
+				loaderr='.\\terralib.lua:4139: variable \'Strict\' is not declared'
+			}
 		},
 		['terra-tr']={
+			['terra.tr']={
+				loaderr='.\\terra/tr.t:58: glue.lua:741: variable \'color\' is not declared'
+			},
+			['terra.tr_align']={
+				loaderr='.\\terra/tr_align.t:6: glue.lua:741: variable \'color\' is not declared'
+			},
+			['terra.tr_api']={
+				loaderr='.\\terra/tr_api.t:49: .\\terra/low.t:73: .\\terra/low.t:479: attempt to index local \'T\' (a nil value)'
+			},
+			['terra.tr_clip']={
+				loaderr='glue.lua:741: variable \'color\' is not declared'
+			},
+			['terra.tr_cursor']={
+				loaderr='.\\terra/tr_cursor.t:42: glue.lua:741: variable \'color\' is not declared'
+			},
+			['terra.tr_font']={
+				loaderr='.\\terra/tr_font.t:12: glue.lua:741: variable \'color\' is not declared'
+			},
+			['terra.tr_itemize']={
+				loaderr='.\\terra/tr_itemize.t:15: glue.lua:741: variable \'color\' is not declared'
+			},
+			['terra.tr_itemize_detect_lang']={
+				loaderr='.\\terra/tr_itemize_detect_lang.t:6: glue.lua:741: variable \'color\' is not declared'
+			},
+			['terra.tr_itemize_detect_script']={
+				loaderr='.\\terra/tr_itemize_detect_script.t:5: glue.lua:741: variable \'color\' is not declared'
+			},
+			['terra.tr_layoutedit']={
+				loaderr='.\\terra/tr_layoutedit.t:6: glue.lua:741: variable \'color\' is not declared'
+			},
+			['terra.tr_paint']={
+				loaderr='.\\terra/tr_paint.t:6: glue.lua:741: variable \'color\' is not declared'
+			},
+			['terra.tr_paint_cairo']={
+				loaderr='.\\terra/low.t:73: .\\terra/low.t:479: attempt to index local \'T\' (a nil value)'
+			},
+			['terra.tr_rasterize']={
+				loaderr='.\\terra/tr_rasterize.t:10: glue.lua:741: variable \'color\' is not declared'
+			},
+			['terra.tr_rle']={
+				mdeps={
+					['terra.low']=true
+				}
+			},
+			['terra.tr_selection']={
+				loaderr='.\\terra/tr_selection.t:6: glue.lua:741: variable \'color\' is not declared'
+			},
+			['terra.tr_shape']={
+				loaderr='.\\terra/tr_shape.t:13: glue.lua:741: variable \'color\' is not declared'
+			},
+			['terra.tr_shape_detect_lang']={
+				loaderr='.\\terra/tr_shape_detect_lang.t:6: glue.lua:741: variable \'color\' is not declared'
+			},
+			['terra.tr_shape_detect_script']={
+				loaderr='.\\terra/tr_shape_detect_script.t:5: glue.lua:741: variable \'color\' is not declared'
+			},
+			['terra.tr_shape_word']={
+				loaderr='.\\terra/tr_shape_word.t:6: glue.lua:741: variable \'color\' is not declared'
+			},
+			['terra.tr_spanedit']={
+				loaderr='.\\terra/tr_spanedit.t:7: glue.lua:741: variable \'color\' is not declared'
+			},
+			['terra.tr_types']={
+				loaderr='glue.lua:741: variable \'color\' is not declared'
+			},
+			['terra.tr_underline']={
+				loaderr='.\\terra/tr_underline.t:6: glue.lua:741: variable \'color\' is not declared'
+			},
+			['terra.tr_wrap']={
+				loaderr='.\\terra/tr_wrap.t:6: glue.lua:741: variable \'color\' is not declared'
+			},
+			['terra.tr_wrap_reorder']={
+				loaderr='.\\terra/tr_wrap_reorder.t:14: glue.lua:741: variable \'color\' is not declared'
+			},
+			['terra.tr_wrap_smawk']={
+				loaderr='.\\terralib.lua:4115: error loading terra module terra.tr_wrap_smawk from file .\\terra/tr_wrap_smawk.t'
+			}
 		},
 		['terra-utf8']={
+			['terra.utf8']={
+				loaderr='.\\terra/utf8.t:133: failed attempting to index field \'utf8\' in name \'utf8.decode.count\' (expected a table but found table)'
+			}
 		},
 		testui={
 			testui={
