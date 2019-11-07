@@ -108,9 +108,6 @@ return {
 					ffi=true,
 					glue=true
 				}
-			},
-			boxblurlib_h={
-				loaderr='.\\boxblurlib_h.lua:2: cannot load module \'boxblurlib\': The specified module could not be found.'
 			}
 		},
 		bundle={
@@ -227,6 +224,9 @@ return {
 		},
 		color={
 			color={
+				mdeps={
+					bit=true
+				}
 			}
 		},
 		coro={
@@ -725,30 +725,25 @@ return {
 			heap={
 			}
 		},
+		hidapi={
+			hidapi={
+				ffi_deps={
+					hidapi=true
+				},
+				mdeps={
+					ffi=true,
+					winapi=true
+				}
+			}
+		},
 		hmac={
 			hmac={
 				autoloads={
-					md5='hmac_md5',
-					sha256='hmac_sha2',
-					sha384='hmac_sha2',
-					sha512='hmac_sha2'
 				},
 				mdeps={
 					bit=true,
 					ffi=true,
 					glue=true
-				}
-			},
-			hmac_md5={
-				mdeps={
-					hmac=true,
-					md5=true
-				}
-			},
-			hmac_sha2={
-				mdeps={
-					hmac=true,
-					sha2=true
 				}
 			}
 		},
@@ -943,6 +938,21 @@ return {
 			}
 		},
 		llvm={
+			llvm={
+				ffi_deps={
+					llvm=true
+				},
+				mdeps={
+					ffi=true,
+					glue=true,
+					llvm_h=true
+				}
+			},
+			llvm_h={
+				mdeps={
+					ffi=true
+				}
+			}
 		},
 		lpeg={
 			lpeg={
@@ -989,46 +999,6 @@ return {
 				mdeps={
 					bit=true,
 					jit=true
-				}
-			},
-			['jit.dis_arm']={
-				mdeps={
-					bit=true
-				}
-			},
-			['jit.dis_arm64']={
-				mdeps={
-					bit=true
-				}
-			},
-			['jit.dis_arm64be']={
-				mdeps={
-					['jit.dis_arm64']=true
-				}
-			},
-			['jit.dis_mips']={
-				mdeps={
-					bit=true
-				}
-			},
-			['jit.dis_mips64']={
-				mdeps={
-					['jit.dis_mips']=true
-				}
-			},
-			['jit.dis_mips64el']={
-				mdeps={
-					['jit.dis_mips']=true
-				}
-			},
-			['jit.dis_mipsel']={
-				mdeps={
-					['jit.dis_mips']=true
-				}
-			},
-			['jit.dis_ppc']={
-				mdeps={
-					bit=true
 				}
 			},
 			['jit.dis_x64']={
@@ -1082,6 +1052,18 @@ return {
 			string={
 			},
 			table={
+			},
+			['table.clone']={
+			},
+			['table.isarray']={
+			},
+			['table.isempty']={
+			},
+			['table.new']={
+			},
+			['table.nkeys']={
+			},
+			['thread.exdata']={
 			}
 		},
 		luapower={
@@ -1090,7 +1072,8 @@ return {
 					ffi=true,
 					glue=true,
 					lfs=true,
-					luapower_rpc=true
+					luapower_rpc=true,
+					terra=true
 				}
 			},
 			luapower_cli={
@@ -1107,12 +1090,22 @@ return {
 		},
 		['luapower-repos']={
 		},
+		['luapower-repos-dev']={
+		},
 		luapower_db={
 			luapower_db={
-				loaderr='module \'luapower_db\' not found'
 			}
 		},
 		luasec={
+			['socket.https']={
+				mdeps={
+					ltn12=true,
+					socket=true,
+					['socket.http']=true,
+					['socket.url']=true,
+					ssl=true
+				}
+			},
 			ssl={
 				mdeps={
 					['ssl.config']=true,
@@ -1211,6 +1204,8 @@ return {
 			mysql_print={
 			}
 		},
+		nginx={
+		},
 		nw={
 			nw={
 				mdeps={
@@ -1230,7 +1225,6 @@ return {
 					bit=true,
 					bitmap=true,
 					box2d=true,
-					cbframe=true,
 					ffi=true,
 					glue=true,
 					time=true,
@@ -1462,10 +1456,25 @@ return {
 			path2d_text={
 			}
 		},
+		pcre={
+		},
+		pcre2={
+		},
 		pixman={
 		},
 		pp={
 			pp={
+			}
+		},
+		proc={
+			proc={
+				mdeps={
+					bit=true,
+					ffi=true,
+					glue=true,
+					winapi=true,
+					['winapi.process']=true
+				}
 			}
 		},
 		pthread={
@@ -1485,6 +1494,14 @@ return {
 				}
 			}
 		},
+		resolver={
+			resolver={
+				mdeps={
+					bit=true,
+					['table.new']=true
+				}
+			}
+		},
 		rs232={
 			rs232={
 				mdeps={
@@ -1499,6 +1516,10 @@ return {
 					bit=true,
 					ffi=true
 				}
+			}
+		},
+		sha1={
+			sha1={
 			}
 		},
 		sha2={
@@ -1600,18 +1621,22 @@ return {
 			asdl={
 			},
 			terra={
-				loaderr='.\\terralib.lua:36: attempt to index global \'terra\' (a nil value)'
 			},
 			terralib={
-				loaderr='.\\terralib.lua:36: attempt to index global \'terra\' (a nil value)'
 			},
 			terralib_luapower={
-				loaderr='.\\terralib_luapower.lua:8: attempt to index global \'terralib\' (a nil value)'
 			}
 		},
 		['terra-arrayfreelist']={
 		},
 		['terra-arrayview']={
+		},
+		['terra-binder']={
+			['terra.binder']={
+				mdeps={
+					['terra/low']=true
+				}
+			}
 		},
 		['terra-bitarray']={
 		},
@@ -1620,6 +1645,14 @@ return {
 		['terra-box2d']={
 		},
 		['terra-boxblur']={
+			boxblurlib_h={
+				ffi_deps={
+					boxblurlib=true
+				},
+				mdeps={
+					ffi=true
+				}
+			}
 		},
 		['terra-cairo']={
 		},
@@ -1631,10 +1664,45 @@ return {
 		},
 		['terra-layer']={
 			layer={
-				loaderr='.\\layer.lua:2: .\\layer_h.lua:2: cannot load module \'layer\': The specified module could not be found.'
+				mdeps={
+					ffi=true,
+					glue=true,
+					layer_h=true
+				}
 			},
 			layer_h={
-				loaderr='.\\layer_h.lua:2: cannot load module \'layer\': The specified module could not be found.'
+				ffi_deps={
+					layer=true
+				},
+				mdeps={
+					ffi=true
+				}
+			},
+			['layer_test.layer_test_state']={
+			},
+			['layer_test.layer_test_state_1']={
+			},
+			['layer_test.layer_test_state_10']={
+			},
+			['layer_test.layer_test_state_11']={
+			},
+			['layer_test.layer_test_state_2']={
+			},
+			['layer_test.layer_test_state_3']={
+			},
+			['layer_test.layer_test_state_4']={
+			},
+			['layer_test.layer_test_state_5']={
+			},
+			['layer_test.layer_test_state_7']={
+			},
+			['layer_test.layer_test_state_8']={
+			},
+			['layer_test.layer_test_state_subsegs']={
+			},
+			['layer_test.layer_test_state_todo']={
+			},
+			layer_test_state={
 			}
 		},
 		['terra-linkedlist']={
@@ -1652,6 +1720,16 @@ return {
 		['terra-tr']={
 		},
 		['terra-utf8']={
+		},
+		testui={
+			testui={
+				mdeps={
+					color=true,
+					ffi=true,
+					glue=true,
+					nw=true
+				}
+			}
 		},
 		thread={
 			thread={
@@ -1774,7 +1852,7 @@ return {
 				}
 			},
 			ui_calendar={
-				loaderr='.\\ui_calendar.lua:9: attempt to index field \'grid\' (a nil value)'
+				loaderr='ui_calendar.lua:9: attempt to index field \'grid\' (a nil value)'
 			},
 			ui_colorpicker={
 				mdeps={
@@ -1906,7 +1984,7 @@ return {
 				}
 			},
 			videoinput_cocoa={
-				loaderr='.\\videoinput_cocoa.lua:7: .\\objc_dispatch.lua:144: cannot resolve symbol \'_dispatch_data_empty\': The specified procedure could not be found.'
+				loaderr='platform not OSX'
 			},
 			videoinput_dshow={
 			}
@@ -1982,6 +2060,11 @@ return {
 				mdeps={
 					winapi=true,
 					['winapi.basebuttonclass']=true
+				}
+			},
+			['winapi.class']={
+				mdeps={
+					winapi=true
 				}
 			},
 			['winapi.clipboard']={
@@ -2477,6 +2560,13 @@ return {
 					['winapi.controlclass']=true,
 					['winapi.itemlist']=true,
 					['winapi.tabcontrol']=true
+				}
+			},
+			['winapi.thread']={
+				mdeps={
+					ffi=true,
+					winapi=true,
+					['winapi.winbase']=true
 				}
 			},
 			['winapi.time']={
