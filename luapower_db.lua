@@ -1072,8 +1072,7 @@ return {
 					ffi=true,
 					glue=true,
 					lfs=true,
-					luapower_rpc=true,
-					terra=true
+					luapower_rpc=true
 				}
 			},
 			luapower_cli={
@@ -1357,6 +1356,7 @@ return {
 			},
 			path2d_bezier2={
 				autoloads={
+					hit='path2d_bezier2_hit',
 					interpolate='path2d_bezier2_ai'
 				},
 				mdeps={
@@ -1379,6 +1379,7 @@ return {
 			},
 			path2d_bezier3={
 				autoloads={
+					hit='path2d_bezier3_hit',
 					interpolate='path2d_bezier3_ai'
 				},
 				mdeps={
@@ -1541,6 +1542,10 @@ return {
 			ltn12={
 			},
 			mime={
+				mdeps={
+					ltn12=true,
+					['mime.core']=true
+				}
 			},
 			['mime.core']={
 			},
@@ -1621,14 +1626,20 @@ return {
 			asdl={
 			},
 			terra={
+				mdeps={
+					asdl=true,
+					terralib=true
+				}
 			},
 			['terra.parsing']={
 			},
 			['terra.std']={
 			},
 			terralib={
+				loaderr='.\\terralib.lua:1: terra not loaded'
 			},
 			terralib_luapower={
+				loaderr='.\\terralib_luapower.lua:4: terra not loaded'
 			}
 		},
 		['terra-arrayfreelist']={
@@ -1991,6 +2002,296 @@ return {
 				loaderr='.\\terra/utf8.t:133: failed attempting to index field \'utf8\' in name \'utf8.decode.count\' (expected a table but found table)'
 			}
 		},
+		['terra.arrayfreelist']={
+			['terra.arrayfreelist']={
+				mdeps={
+					['terra.low']=true
+				}
+			}
+		},
+		['terra.arrayview']={
+			['terra.arrayview']={
+				mdeps={
+					['terra.low']=true
+				}
+			},
+			['terra.rawstringview']={
+				mdeps={
+					['terra.arrayview']=true,
+					['terra.dynarray']=true,
+					['terra.low']=true
+				}
+			}
+		},
+		['terra.binder']={
+			['terra.binder']={
+				loaderr='.\\terra\\binder.lua:70: terra not loaded'
+			}
+		},
+		['terra.bitarray']={
+			['terra.bitarray']={
+				loaderr='.\\terra/bitarray.t:14: attempt to call global \'rect\' (a nil value)'
+			}
+		},
+		['terra.bitmap']={
+			['terra.bitmap']={
+				mdeps={
+					['terra.low']=true
+				}
+			}
+		},
+		['terra.box2d']={
+			['terra.box2d']={
+				mdeps={
+					['terra.low']=true
+				}
+			}
+		},
+		['terra.boxblur']={
+			boxblurlib_h={
+				loaderr='.\\boxblurlib_h.lua:2: cannot load module \'boxblurlib\': The specified module could not be found.'
+			},
+			['terra.boxblur']={
+				mdeps={
+					['terra.bitmap']=true,
+					['terra.low']=true
+				}
+			}
+		},
+		['terra.cairo']={
+			['terra.cairo']={
+				mdeps={
+					cairo_h=true,
+					['terra.bitmap']=true,
+					['terra.low']=true
+				}
+			}
+		},
+		['terra.dynarray']={
+			['terra.dynarray']={
+				mdeps={
+					['terra.arrayview']=true,
+					['terra.low']=true
+				}
+			}
+		},
+		['terra.fixedfreelist']={
+			['terra.fixedfreelist']={
+				mdeps={
+					['terra.low']=true
+				}
+			}
+		},
+		['terra.hashmap']={
+			['terra.hashmap']={
+				mdeps={
+					['terra.low']=true
+				}
+			}
+		},
+		['terra.layer']={
+			layer={
+				mdeps={
+					ffi=true,
+					glue=true,
+					layer_h=true
+				}
+			},
+			layer_h={
+				ffi_deps={
+					layer=true
+				},
+				mdeps={
+					ffi=true
+				}
+			},
+			['layer_test.layer_test_state']={
+			},
+			['layer_test.layer_test_state_1']={
+			},
+			['layer_test.layer_test_state_10']={
+			},
+			['layer_test.layer_test_state_11']={
+			},
+			['layer_test.layer_test_state_2']={
+			},
+			['layer_test.layer_test_state_3']={
+			},
+			['layer_test.layer_test_state_4']={
+			},
+			['layer_test.layer_test_state_5']={
+			},
+			['layer_test.layer_test_state_7']={
+			},
+			['layer_test.layer_test_state_8']={
+			},
+			['layer_test.layer_test_state_subsegs']={
+			},
+			['layer_test.layer_test_state_todo']={
+			},
+			layer_test_state={
+			},
+			['terra.layer']={
+				loaderr='.\\terra/low.t:73: .\\terra/low.t:73: .\\terra/tr_types.t:106: attempt to call global \'rect\' (a nil value)'
+			},
+			['terra.layer_api']={
+				loaderr='.\\terra/layer_api.t:42: .\\terra/low.t:73: .\\terra/low.t:73: .\\terra/tr_types.t:106: attempt to call global \'rect\' (a nil value)'
+			}
+		},
+		['terra.linkedlist']={
+			['terra.linkedlist']={
+				mdeps={
+					['terra.low']=true
+				}
+			}
+		},
+		['terra.low']={
+			['terra.low']={
+				autoloads={
+					arr='terra.dynarray',
+					arrview='terra.arrayview',
+					map='terra.hashmap',
+					random='terra.random',
+					randomseed='terra.random',
+					set='terra.hashmap'
+				},
+				mdeps={
+					ffi=true,
+					glue=true,
+					['jit.zone']=true,
+					pp=true
+				}
+			},
+			['terra.memcheck']={
+				autoloads={
+					arr='terra.dynarray',
+					arrview='terra.arrayview',
+					random='terra.random',
+					randomseed='terra.random',
+					set='terra.hashmap'
+				},
+				mdeps={
+					['terra.hashmap']=true,
+					['terra.low']=true
+				}
+			}
+		},
+		['terra.lrucache']={
+			['terra.lrucache']={
+				mdeps={
+					['terra.linkedlist']=true,
+					['terra.low']=true
+				}
+			}
+		},
+		['terra.oo']={
+			['terra.oo']={
+				mdeps={
+					['terra.low']=true
+				}
+			}
+		},
+		['terra.phf']={
+			['terra.phf']={
+				mdeps={
+					['terra.low']=true
+				}
+			}
+		},
+		['terra.random']={
+			['terra.random']={
+				mdeps={
+					['terra.low']=true
+				}
+			}
+		},
+		['terra.tr']={
+			['terra.tr']={
+				loaderr='.\\terra/tr.t:58: .\\terra/tr_types.t:13: terra.tr_paint_cairo not loaded'
+			},
+			['terra.tr_align']={
+				loaderr='.\\terra/tr_align.t:6: .\\terra/tr_types.t:13: terra.tr_paint_cairo not loaded'
+			},
+			['terra.tr_api']={
+				loaderr='.\\terra/tr_api.t:49: .\\terra/low.t:73: .\\terra/tr_types.t:106: attempt to call global \'rect\' (a nil value)'
+			},
+			['terra.tr_clip']={
+				loaderr='.\\terra/tr_clip.t:10: .\\terra/tr_types.t:13: terra.tr_paint_cairo not loaded'
+			},
+			['terra.tr_cursor']={
+				loaderr='.\\terra/tr_cursor.t:42: .\\terra/tr_types.t:13: terra.tr_paint_cairo not loaded'
+			},
+			['terra.tr_font']={
+				loaderr='.\\terra/tr_font.t:12: .\\terra/tr_types.t:13: terra.tr_paint_cairo not loaded'
+			},
+			['terra.tr_itemize']={
+				loaderr='.\\terra/tr_itemize.t:15: .\\terra/tr_types.t:13: terra.tr_paint_cairo not loaded'
+			},
+			['terra.tr_itemize_detect_lang']={
+				loaderr='.\\terra/tr_itemize_detect_lang.t:6: .\\terra/tr_types.t:13: terra.tr_paint_cairo not loaded'
+			},
+			['terra.tr_itemize_detect_script']={
+				loaderr='.\\terra/tr_itemize_detect_script.t:5: .\\terra/tr_types.t:13: terra.tr_paint_cairo not loaded'
+			},
+			['terra.tr_layoutedit']={
+				loaderr='.\\terra/tr_layoutedit.t:6: .\\terra/tr_types.t:13: terra.tr_paint_cairo not loaded'
+			},
+			['terra.tr_paint']={
+				loaderr='.\\terra/tr_paint.t:6: .\\terra/tr_types.t:13: terra.tr_paint_cairo not loaded'
+			},
+			['terra.tr_paint_cairo']={
+				loaderr='.\\terra/low.t:73: .\\terra/tr_types.t:106: attempt to call global \'rect\' (a nil value)'
+			},
+			['terra.tr_rasterize']={
+				loaderr='.\\terra/tr_rasterize.t:10: .\\terra/tr_types.t:13: terra.tr_paint_cairo not loaded'
+			},
+			['terra.tr_rle']={
+				mdeps={
+					['terra.low']=true
+				}
+			},
+			['terra.tr_selection']={
+				loaderr='.\\terra/tr_selection.t:6: .\\terra/tr_types.t:13: terra.tr_paint_cairo not loaded'
+			},
+			['terra.tr_shape']={
+				loaderr='.\\terra/tr_shape.t:13: .\\terra/tr_types.t:13: terra.tr_paint_cairo not loaded'
+			},
+			['terra.tr_shape_detect_lang']={
+				loaderr='.\\terra/tr_shape_detect_lang.t:6: .\\terra/tr_types.t:13: terra.tr_paint_cairo not loaded'
+			},
+			['terra.tr_shape_detect_script']={
+				loaderr='.\\terra/tr_shape_detect_script.t:5: .\\terra/tr_types.t:13: terra.tr_paint_cairo not loaded'
+			},
+			['terra.tr_shape_word']={
+				loaderr='.\\terra/tr_shape_word.t:6: .\\terra/tr_types.t:13: terra.tr_paint_cairo not loaded'
+			},
+			['terra.tr_spanedit']={
+				loaderr='.\\terra/tr_spanedit.t:7: .\\terra/tr_types.t:13: terra.tr_paint_cairo not loaded'
+			},
+			['terra.tr_types']={
+				loaderr='.\\terra/tr_types.t:13: terra.tr_paint_cairo not loaded'
+			},
+			['terra.tr_underline']={
+				loaderr='.\\terra/tr_underline.t:6: .\\terra/tr_types.t:13: terra.tr_paint_cairo not loaded'
+			},
+			['terra.tr_wrap']={
+				loaderr='.\\terra/tr_wrap.t:6: .\\terra/tr_types.t:13: terra.tr_paint_cairo not loaded'
+			},
+			['terra.tr_wrap_reorder']={
+				loaderr='.\\terra/tr_wrap_reorder.t:14: .\\terra/tr_types.t:13: terra.tr_paint_cairo not loaded'
+			},
+			['terra.tr_wrap_smawk']={
+			}
+		},
+		['terra.utf8']={
+			['terra.utf8']={
+				mdeps={
+					['terra.arrayview']=true,
+					['terra.dynarray']=true,
+					['terra.low']=true
+				}
+			}
+		},
 		testui={
 			testui={
 				mdeps={
@@ -2079,6 +2380,67 @@ return {
 				}
 			}
 		},
+		tr0={
+			tr0={
+				mdeps={
+					bit=true,
+					box2d=true,
+					ffi=true,
+					freetype=true,
+					fribidi=true,
+					glue=true,
+					harfbuzz=true,
+					libunibreak=true,
+					lrucache=true,
+					tr0_shape_lang=true,
+					tr0_shape_reorder=true,
+					tr0_shape_script=true,
+					utf8=true
+				}
+			},
+			tr0_raster_cairo={
+				mdeps={
+					box2d=true,
+					cairo=true,
+					color=true,
+					ffi=true,
+					freetype=true,
+					glue=true,
+					['jit.zone']=true,
+					tr0_raster_ft=true
+				}
+			},
+			tr0_raster_ft={
+				mdeps={
+					bit=true,
+					ffi=true,
+					font_db=true,
+					freetype=true,
+					glue=true,
+					['jit.zone']=true,
+					lrucache=true
+				}
+			},
+			tr0_shape_lang={
+				mdeps={
+					ffi=true,
+					harfbuzz=true
+				}
+			},
+			tr0_shape_reorder={
+				mdeps={
+					bit=true,
+					glue=true
+				}
+			},
+			tr0_shape_script={
+				mdeps={
+					bit=true,
+					glue=true,
+					harfbuzz=true
+				}
+			}
+		},
 		tuple={
 			tuple={
 			}
@@ -2112,7 +2474,7 @@ return {
 					nw=true,
 					oo=true,
 					time=true,
-					tr=true
+					tr0=true
 				}
 			},
 			ui_button={
@@ -2122,7 +2484,12 @@ return {
 				}
 			},
 			ui_calendar={
-				loaderr='ui_calendar.lua:9: attempt to index field \'grid\' (a nil value)'
+				mdeps={
+					glue=true,
+					tr0_raster_cairo=true,
+					ui=true,
+					ui_grid=true
+				}
 			},
 			ui_colorpicker={
 				mdeps={
@@ -2149,7 +2516,7 @@ return {
 				mdeps={
 					box2d=true,
 					glue=true,
-					tr=true,
+					tr0=true,
 					ui=true
 				}
 			},
@@ -2257,6 +2624,44 @@ return {
 				loaderr='platform not OSX'
 			},
 			videoinput_dshow={
+			}
+		},
+		webb={
+			action={
+				loaderr='.\\action.lua:60: attempt to call global \'config\' (a nil value)'
+			},
+			auth={
+				loaderr='.\\auth.lua:118: module \'resty.random\' not found'
+			},
+			lp={
+			},
+			ngx={
+				loaderr='.\\ngx.lua:13: attempt to index global \'ngx\' (a nil value)'
+			},
+			query={
+				loaderr='.\\query.lua:29: module \'resty.mysql\' not found'
+			},
+			['resty.socket']={
+				mdeps={
+					socket=true
+				}
+			},
+			sendmail={
+				mdeps={
+					ltn12=true,
+					mime=true,
+					['resty.socket']=true,
+					['socket.smtp']=true
+				}
+			},
+			session={
+				loaderr='.\\session.lua:1: attempt to index global \'ngx\' (a nil value)'
+			},
+			webb={
+				loaderr='.\\webb.lua:430: attempt to index global \'ngx\' (a nil value)'
+			},
+			webbjs={
+				loaderr='.\\webbjs.lua:61: .\\webb.lua:430: attempt to index global \'ngx\' (a nil value)'
 			}
 		},
 		winapi={
@@ -2967,9 +3372,7 @@ return {
 				}
 			},
 			['winapi.wmapp']={
-				mdeps={
-					winapi=true
-				}
+				loaderr='.\\winapi\\wmapp.lua:10: winapi.window not loaded'
 			}
 		},
 		['winapi.cairopanel']={
