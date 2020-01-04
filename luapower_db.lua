@@ -1731,7 +1731,7 @@ return {
 		},
 		['terra.binder']={
 			['terra.binder']={
-				loaderr='./terra/binder.lua:74: ./terralib.lua:4072: attempt to call field \'loadfile\' (a nil value)',
+				env='terra',
 				mdeps={
 					['terra.low']=true
 				}
@@ -4681,7 +4681,7 @@ return {
 		},
 		['terra.binder']={
 			['terra.binder']={
-				loaderr='.\\terra\\binder.lua:74: .\\terralib.lua:4072: attempt to call field \'loadfile\' (a nil value)',
+				env='terra',
 				mdeps={
 					['terra.low']=true
 				}
@@ -8024,7 +8024,7 @@ return {
 		},
 		['terra.binder']={
 			['terra.binder']={
-				loaderr='./terra/binder.lua:74: ./terralib.lua:4072: attempt to call field \'loadfile\' (a nil value)',
+				env='terra',
 				mdeps={
 					['terra.low']=true
 				}
