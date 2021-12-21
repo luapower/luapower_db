@@ -45,6 +45,7 @@ return {
 				}
 			},
 			bearssl_ec_h={
+				loaderr='./bearssl_ec_h.lua:122: declaration specifier expected near \'br_hash_class\' at line 78',
 				mdeps={
 					ffi=true
 				}
@@ -79,18 +80,18 @@ return {
 				}
 			},
 			bearssl_ssl_h={
+				loaderr='./bearssl_ssl_h.lua:7: ./bearssl_x509_h.lua:3: ./bearssl_ec_h.lua:122: declaration specifier expected near \'br_hash_class\' at line 78',
 				mdeps={
 					bearssl_block_h=true,
 					bearssl_hash_h=true,
 					bearssl_hmac_h=true,
-					bearssl_prf_h=true,
 					bearssl_rand_h=true,
-					bearssl_rsa_h=true,
 					bearssl_x509_h=true,
 					ffi=true
 				}
 			},
 			bearssl_x509_h={
+				loaderr='./bearssl_x509_h.lua:3: ./bearssl_ec_h.lua:122: declaration specifier expected near \'br_hash_class\' at line 78',
 				mdeps={
 					bearssl_ec_h=true,
 					bearssl_rsa_h=true,
@@ -234,12 +235,14 @@ return {
 		},
 		cbframe={
 			cbframe={
+				loaderr='./fs_posix.lua:635: cannot convert \'function\' to \'void *\'',
 				mdeps={
 					cbframe_x86=true,
 					dynasm=true
 				}
 			},
 			cbframe_dump={
+				loaderr='./cbframe_dump.lua:2: ./fs_posix.lua:635: cannot convert \'function\' to \'void *\'',
 				mdeps={
 					cbframe=true,
 					ffi=true
@@ -791,9 +794,8 @@ return {
 		libtls={
 			libtls={
 				ffi_deps={
-					tls=false
+					tls_bearssl=true
 				},
-				loaderr='./libtls.lua:11: libtls.so: cannot open shared object file: No such file or directory',
 				mdeps={
 					ffi=true,
 					libtls_h=true
@@ -1097,11 +1099,15 @@ return {
 		},
 		mm={
 			mm={
-				loaderr='./$daemon.lua:54: assign to undeclared variable \'app_name\'',
 				mdeps={
 					['$daemon']=true,
 					base64=true,
+					http=true,
+					http_server=true,
+					logging=true,
+					mm_conf=true,
 					mustache=true,
+					mysql=true,
 					proc=true,
 					queue=true,
 					schema=true,
@@ -1166,14 +1172,13 @@ return {
 				}
 			},
 			nw_cocoa={
-				loaderr='platform not OSX',
+				loaderr='./nw_cocoa.lua:9: ./fs_posix.lua:635: cannot convert \'function\' to \'void *\'',
 				mdeps={
 					bit=true,
 					box2d=true,
 					cbframe=true,
 					ffi=true,
-					glue=true,
-					objc=true
+					glue=true
 				}
 			},
 			nw_winapi={
@@ -1654,8 +1659,8 @@ return {
 				}
 			},
 			sock_libtls={
-				loaderr='./sock_libtls.lua:9: ./libtls.lua:11: libtls.so: cannot open shared object file: No such file or directory',
 				mdeps={
+					ffi=true,
 					glue=true,
 					libtls=true,
 					sock=true
@@ -1671,9 +1676,16 @@ return {
 		},
 		sp={
 			sp={
-				loaderr='./$daemon.lua:54: assign to undeclared variable \'app_name\'',
 				mdeps={
 					['$daemon']=true,
+					http=true,
+					http_server=true,
+					mysql=true,
+					sp_admin=true,
+					sp_browse=true,
+					sp_conf=true,
+					sp_db=true,
+					tarantool=true,
 					xapp=true
 				}
 			},
@@ -1684,15 +1696,14 @@ return {
 			sp_conf_sample={
 			},
 			sp_db={
-				loaderr='./sp_db.lua:516: attempt to index global \'sp\' (a nil value)',
 				mdeps={
 					schema=true,
+					schema_std=true,
 					webb_auth=true,
 					webb_lang=true
 				}
 			},
 			sp_prod={
-				loaderr='./sp_prod.lua:2: ./$daemon.lua:54: assign to undeclared variable \'app_name\'',
 				mdeps={
 					sp=true
 				}
@@ -1783,6 +1794,7 @@ return {
 			['terra.rawstringview']={
 				env='terra',
 				mdeps={
+					['terra.arrayview']=true,
 					['terra.dynarray']=true,
 					['terra.low']=true
 				}
@@ -2220,7 +2232,6 @@ return {
 		['terra.utf8']={
 			['terra.utf8']={
 				autoloads={
-					arrview='terra.arrayview',
 					random='terra.random',
 					randomseed='terra.random',
 					set='terra.hashmap'
@@ -4126,7 +4137,6 @@ return {
 		},
 		luapower_db={
 			luapower_db={
-				loaderr='module \'luapower_db\' not found'
 			}
 		},
 		luastate={
@@ -4560,7 +4570,9 @@ return {
 					path2d_arc=true,
 					path2d_arc_3p=true,
 					path2d_bezier2=true,
+					path2d_bezier2_hit=true,
 					path2d_bezier3=true,
+					path2d_bezier3_hit=true,
 					path2d_circle_3p=true,
 					path2d_line=true,
 					path2d_point=true,
@@ -4586,7 +4598,6 @@ return {
 			},
 			path2d_bezier2={
 				autoloads={
-					hit='path2d_bezier2_hit',
 					interpolate='path2d_bezier2_ai'
 				},
 				mdeps={
@@ -4609,7 +4620,6 @@ return {
 			},
 			path2d_bezier3={
 				autoloads={
-					hit='path2d_bezier3_hit',
 					interpolate='path2d_bezier3_ai'
 				},
 				mdeps={
@@ -4826,12 +4836,13 @@ return {
 		},
 		sp={
 			sp={
-				loaderr='.\\sp.lua:44: .\\sp_db.lua:516: attempt to index global \'sp\' (a nil value)',
 				mdeps={
 					['$daemon']=true,
 					http=true,
 					http_server=true,
 					mysql=true,
+					sp_admin=true,
+					sp_browse=true,
 					sp_conf=true,
 					sp_db=true,
 					tarantool=true,
@@ -4845,15 +4856,14 @@ return {
 			sp_conf_sample={
 			},
 			sp_db={
-				loaderr='.\\sp_db.lua:516: attempt to index global \'sp\' (a nil value)',
 				mdeps={
 					schema=true,
+					schema_std=true,
 					webb_auth=true,
 					webb_lang=true
 				}
 			},
 			sp_prod={
-				loaderr='.\\sp_prod.lua:2: .\\sp.lua:44: .\\sp_db.lua:516: attempt to index global \'sp\' (a nil value)',
 				mdeps={
 					sp=true
 				}
@@ -5110,7 +5120,6 @@ return {
 				autoloads={
 					arr='terra.dynarray',
 					arrview='terra.arrayview',
-					map='terra.hashmap',
 					random='terra.random',
 					randomseed='terra.random',
 					set='terra.hashmap'
@@ -5127,13 +5136,13 @@ return {
 				autoloads={
 					arr='terra.dynarray',
 					arrview='terra.arrayview',
-					map='terra.hashmap',
 					random='terra.random',
 					randomseed='terra.random',
 					set='terra.hashmap'
 				},
 				env='terra',
 				mdeps={
+					['terra.hashmap']=true,
 					['terra.low']=true
 				}
 			}
@@ -5380,15 +5389,14 @@ return {
 		['terra.utf8']={
 			['terra.utf8']={
 				autoloads={
-					arr='terra.dynarray',
 					arrview='terra.arrayview',
-					map='terra.hashmap',
 					random='terra.random',
 					randomseed='terra.random',
 					set='terra.hashmap'
 				},
 				env='terra',
 				mdeps={
+					['terra.dynarray']=true,
 					['terra.low']=true
 				}
 			}
@@ -5473,9 +5481,11 @@ return {
 				}
 			},
 			ui_calendar={
+				loaderr='.\\ui.lua:270: .\\ui.lua:270: .\\ui.lua:159: assertion failed!',
 				mdeps={
 					glue=true,
-					ui=true
+					ui=true,
+					ui_grid=true
 				}
 			},
 			ui_colorpicker={
@@ -5555,7 +5565,8 @@ return {
 				mdeps={
 					box2d=true,
 					glue=true,
-					ui=true
+					ui=true,
+					ui_button=true
 				}
 			},
 			ui_zoomcalendar={
