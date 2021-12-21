@@ -1,10 +1,13 @@
 return {
 	linux64={
-		['ace.js']={
-		},
 		acme={
 			acme={
-				loaderr='error loading module \'acme\' from file \'./acme.lua\''
+				mdeps={
+					base64=true,
+					cjson=true,
+					http=true,
+					sha2=true
+				}
 			}
 		},
 		affine2d={
@@ -164,22 +167,6 @@ return {
 				}
 			}
 		},
-		bnet={
-			bnet={
-				loaderr='./bnet.lua:7: ./bnet_h.lua:208: attempt to redefine \'sockaddr\' at line 6',
-				mdeps={
-					bit=true,
-					bnet_h=true,
-					ffi=true
-				}
-			},
-			bnet_h={
-				loaderr='./bnet_h.lua:208: attempt to redefine \'sockaddr\' at line 6',
-				mdeps={
-					ffi=true
-				}
-			}
-		},
 		box2d={
 			box2d={
 			}
@@ -247,14 +234,12 @@ return {
 		},
 		cbframe={
 			cbframe={
-				loaderr='./fs_posix.lua:635: cannot convert \'function\' to \'void *\'',
 				mdeps={
 					cbframe_x86=true,
 					dynasm=true
 				}
 			},
 			cbframe_dump={
-				loaderr='./cbframe_dump.lua:2: ./fs_posix.lua:635: cannot convert \'function\' to \'void *\'',
 				mdeps={
 					cbframe=true,
 					ffi=true
@@ -277,25 +262,9 @@ return {
 			}
 		},
 		cjson={
-			cjson={
-			},
 			prettycjson={
 				mdeps={
 					['cjson.safe']=true
-				}
-			}
-		},
-		ck={
-			ck={
-				loaderr='./ck.lua:8: ./x_dba.lua:7: attempt to index local \'layer\' (a nil value)',
-				mdeps={
-					['$']=true,
-					webb=true,
-					webb_action=true,
-					webb_query=true,
-					x_dba=true,
-					xmodule=true,
-					xrowset=true
 				}
 			}
 		},
@@ -580,7 +549,8 @@ return {
 		glue={
 			glue={
 				mdeps={
-					ffi=true
+					ffi=true,
+					['string.buffer']=true
 				}
 			}
 		},
@@ -622,7 +592,7 @@ return {
 			hd_db={
 			},
 			hd_install={
-				loaderr='./sock.lua:1905: ./coro.lua:51',
+				loaderr='./sock.lua:1893: ./coro.lua:51',
 				mdeps={
 					['$']=true,
 					hd_conf=true,
@@ -688,7 +658,7 @@ return {
 					base64=true,
 					glue=true,
 					http_date=true,
-					['lpeg.re']=true
+					relabel=true
 				}
 			},
 			http_server={
@@ -697,12 +667,6 @@ return {
 					glue=true,
 					http=true,
 					time=true
-				}
-			},
-			http_socket_luasec={
-				loaderr='./http_socket_luasec.lua:5: module \'socketloop\' not found',
-				mdeps={
-					socketloop=true
 				}
 			}
 		},
@@ -728,50 +692,16 @@ return {
 		},
 		jsmin={
 		},
-		lanes={
-			lanes={
-				mdeps={
-					['lanes.core']=true
-				}
-			},
-			['lanes.core']={
-			}
+		ldecnumber={
 		},
 		lexer={
 			lexer={
 				mdeps={
-					lpeg=true
+					lpeglabel=true
 				}
 			}
 		},
 		lfrb={
-		},
-		libb64={
-			libb64={
-				ffi_deps={
-					b64=true
-				},
-				mdeps={
-					ffi=true
-				}
-			}
-		},
-		libcurl={
-			libcurl={
-				ffi_deps={
-					curl=true
-				},
-				mdeps={
-					bit=true,
-					ffi=true,
-					libcurl_h=true
-				}
-			},
-			libcurl_h={
-				mdeps={
-					ffi=true
-				}
-			}
 		},
 		libexif={
 			libexif={
@@ -809,8 +739,6 @@ return {
 			}
 		},
 		libmariadb={
-		},
-		libmysql={
 		},
 		libogg={
 			libogg_h={
@@ -863,8 +791,9 @@ return {
 		libtls={
 			libtls={
 				ffi_deps={
-					tls_bearssl=true
+					tls=false
 				},
+				loaderr='./libtls.lua:11: libtls.so: cannot open shared object file: No such file or directory',
 				mdeps={
 					ffi=true,
 					libtls_h=true
@@ -933,12 +862,22 @@ return {
 				}
 			}
 		},
-		lpeg={
-			lpeg={
-			},
-			['lpeg.re']={
+		lpeglabel={
+			relabel={
 				mdeps={
-					lpeg=true
+					lpeglabel=true
+				}
+			}
+		},
+		lpegrex={
+			lpegrex={
+				mdeps={
+					lpeglabel=true
+				}
+			},
+			lpegrex_c11={
+				mdeps={
+					lpegrex=true
 				}
 			}
 		},
@@ -1065,24 +1004,10 @@ return {
 		},
 		['luapower-repos']={
 		},
+		['luapower-repos-abandoned']={
+		},
 		luapower_db={
 			luapower_db={
-			}
-		},
-		luasec={
-			['socket.https']={
-				loaderr='./socket/https.lua:9: module \'socket\' not found',
-				mdeps={
-					socket=true
-				}
-			},
-			ssl={
-				mdeps={
-					['ssl.config']=true,
-					['ssl.context']=true,
-					['ssl.core']=true,
-					['ssl.x509']=true
-				}
 			}
 		},
 		luastate={
@@ -1118,9 +1043,8 @@ return {
 		lz4={
 			lz4={
 				ffi_deps={
-					lz4=false
+					lz4=true
 				},
-				loaderr='./lz4.lua:149: liblz4.so: cannot open shared object file: No such file or directory',
 				mdeps={
 					ffi=true
 				}
@@ -1137,13 +1061,6 @@ return {
 				},
 				mdeps={
 					ffi=true
-				}
-			}
-		},
-		messagepack={
-			messagepack={
-				mdeps={
-					jit=true
 				}
 			}
 		},
@@ -1180,20 +1097,27 @@ return {
 		},
 		mm={
 			mm={
+				loaderr='./$daemon.lua:54: assign to undeclared variable \'app_name\'',
 				mdeps={
 					['$daemon']=true,
 					base64=true,
-					http=true,
-					http_server=true,
-					logging=true,
-					mm_conf=true,
 					mustache=true,
-					mysql_client=true,
 					proc=true,
 					queue=true,
+					schema=true,
 					sock=true,
+					webb=true,
 					xapp=true,
 					xmodule=true
+				}
+			}
+		},
+		msgpack={
+			msgpack={
+				mdeps={
+					bit=true,
+					ffi=true,
+					glue=true
 				}
 			}
 		},
@@ -1216,29 +1140,13 @@ return {
 			mysql={
 				mdeps={
 					bit=true,
-					ffi=true,
-					mysql_h=true
-				}
-			},
-			mysql_h={
-				mdeps={
-					ffi=true
-				}
-			},
-			mysql_print={
-			}
-		},
-		mysql_client={
-			mysql_client={
-				mdeps={
-					bit=true,
 					errors=true,
 					ffi=true,
 					glue=true,
 					sha1=true
 				}
 			},
-			mysql_client_print={
+			mysql_print={
 				mdeps={
 					cjson=true
 				}
@@ -1258,13 +1166,14 @@ return {
 				}
 			},
 			nw_cocoa={
-				loaderr='./nw_cocoa.lua:9: ./fs_posix.lua:635: cannot convert \'function\' to \'void *\'',
+				loaderr='platform not OSX',
 				mdeps={
 					bit=true,
 					box2d=true,
 					cbframe=true,
 					ffi=true,
-					glue=true
+					glue=true,
+					objc=true
 				}
 			},
 			nw_winapi={
@@ -1636,14 +1545,6 @@ return {
 		},
 		pixman={
 		},
-		pkcs11={
-			pkcs11={
-				loaderr='./pkcs11.lua:2272: malformed number near \'0UL\' at line 19',
-				mdeps={
-					ffi=true
-				}
-			}
-		},
 		pp={
 			pp={
 			}
@@ -1707,6 +1608,19 @@ return {
 				}
 			}
 		},
+		schema={
+			schema={
+				mdeps={
+					glue=true
+				}
+			},
+			schema_std={
+				mdeps={
+					glue=true,
+					schema=true
+				}
+			}
+		},
 		sha1={
 			sha1={
 			}
@@ -1740,18 +1654,15 @@ return {
 				}
 			},
 			sock_libtls={
+				loaderr='./sock_libtls.lua:9: ./libtls.lua:11: libtls.so: cannot open shared object file: No such file or directory',
 				mdeps={
-					ffi=true,
 					glue=true,
 					libtls=true,
 					sock=true
 				}
 			},
 			sock_schannel={
-				ffi_deps={
-					crypt32=false
-				},
-				loaderr='./sock_schannel.lua:6: libcrypt32.so: cannot open shared object file: No such file or directory',
+				loaderr='platform not Windows',
 				mdeps={
 					ffi=true,
 					['winapi.types']=true
@@ -1760,34 +1671,28 @@ return {
 		},
 		sp={
 			sp={
-				loaderr='./sp.lua:43: ./sp_admin.lua:4: attempt to call global \'sql_rowset\' (a nil value)',
+				loaderr='./$daemon.lua:54: assign to undeclared variable \'app_name\'',
 				mdeps={
 					['$daemon']=true,
-					http=true,
-					http_server=true,
-					mysql_client=true,
-					sp_admin=true,
-					sp_browse=true,
-					sp_conf=true,
-					sp_db=true,
 					xapp=true
 				}
 			},
 			sp_admin={
-				loaderr='./sp_admin.lua:4: attempt to call global \'sql_rowset\' (a nil value)'
 			},
 			sp_browse={
 			},
 			sp_conf_sample={
-				loaderr='./sp_conf_sample.lua:2: attempt to call global \'config\' (a nil value)'
 			},
 			sp_db={
+				loaderr='./sp_db.lua:516: attempt to index global \'sp\' (a nil value)',
 				mdeps={
+					schema=true,
+					webb_auth=true,
 					webb_lang=true
 				}
 			},
 			sp_prod={
-				loaderr='./sp_prod.lua:2: ./sp.lua:43: ./sp_admin.lua:4: attempt to call global \'sql_rowset\' (a nil value)',
+				loaderr='./sp_prod.lua:2: ./$daemon.lua:54: assign to undeclared variable \'app_name\'',
 				mdeps={
 					sp=true
 				}
@@ -1803,16 +1708,18 @@ return {
 			sqlpp_mysql={
 				mdeps={
 					glue=true,
-					mysql_client=true,
-					sqlpp=true
+					mysql=true
+				}
+			},
+			sqlpp_tarantool={
+				mdeps={
+					glue=true,
+					msgpack=true,
+					tarantool=true
 				}
 			}
 		},
 		['ssh-msys']={
-		},
-		struct={
-			struct={
-			}
 		},
 		tarantool={
 			tarantool={
@@ -1822,7 +1729,7 @@ return {
 					errors=true,
 					ffi=true,
 					glue=true,
-					messagepack=true,
+					msgpack=true,
 					sha1=true
 				}
 			}
@@ -1830,14 +1737,6 @@ return {
 		terra={
 			asdl={
 				mdeps={
-					terralist=true
-				}
-			},
-			terra={
-				env='terra',
-				mdeps={
-					asdl=true,
-					terralib=true,
 					terralist=true
 				}
 			},
@@ -1884,13 +1783,14 @@ return {
 			['terra.rawstringview']={
 				env='terra',
 				mdeps={
+					['terra.dynarray']=true,
 					['terra.low']=true
 				}
 			}
 		},
 		['terra.binder']={
 			['terra.binder']={
-				loaderr='./terra/binder.lua:74: ./terralib.lua:4072: attempt to call field \'loadfile\' (a nil value)',
+				env='terra',
 				mdeps={
 					['terra.low']=true
 				}
@@ -2020,19 +1920,22 @@ return {
 			},
 			['terra.layer']={
 				env='terra',
-				loaderr='./terra/low.t:73: ./terra/low.t:73: ./terra/low.t:73: module \'xxhash_h\' not found',
 				mdeps={
+					['terra.bitmap']=true,
+					['terra.box2d']=true,
+					['terra.boxblur']=true,
 					['terra.cairo']=true,
 					['terra.low']=true,
 					['terra.memcheck']=true,
+					['terra.tr_api']=true,
 					['terra.tr_paint_cairo']=true
 				}
 			},
 			['terra.layer_api']={
 				env='terra',
-				loaderr='terra/layer_api.t:42: ./terra/low.t:73: ./terra/low.t:73: ./terra/low.t:73: module \'xxhash_h\' not found',
 				mdeps={
-					['terra.layer']=true
+					['terra.layer']=true,
+					['terra.low']=true
 				}
 			}
 		},
@@ -2049,6 +1952,7 @@ return {
 				autoloads={
 					arr='terra.dynarray',
 					arrview='terra.arrayview',
+					map='terra.hashmap',
 					random='terra.random',
 					randomseed='terra.random',
 					set='terra.hashmap'
@@ -2112,85 +2016,99 @@ return {
 		['terra.tr']={
 			['terra.tr']={
 				env='terra',
-				loaderr='terra/tr.t:58: ./terra/low.t:73: module \'xxhash_h\' not found',
 				mdeps={
-					['terra.tr_types']=true
+					['terra.tr_align']=true,
+					['terra.tr_clip']=true,
+					['terra.tr_itemize']=true,
+					['terra.tr_paint']=true,
+					['terra.tr_types']=true,
+					['terra.tr_wrap']=true
 				}
 			},
 			['terra.tr_align']={
 				env='terra',
-				loaderr='terra/tr_align.t:6: ./terra/low.t:73: module \'xxhash_h\' not found',
 				mdeps={
-					['terra.tr_types']=true
+					['terra.tr_font']=true,
+					['terra.tr_types']=true,
+					['terra.tr_wrap']=true
 				}
 			},
 			['terra.tr_api']={
 				env='terra',
-				loaderr='terra/tr_api.t:49: ./terra/low.t:73: ./terra/low.t:73: module \'xxhash_h\' not found',
 				mdeps={
+					['terra.low']=true,
 					['terra.memcheck']=true,
-					['terra.tr_paint_cairo']=true
+					['terra.rawstringview']=true,
+					['terra.tr']=true,
+					['terra.tr_cursor']=true,
+					['terra.tr_paint_cairo']=true,
+					['terra.tr_underline']=true,
+					['terra.utf8']=true
 				}
 			},
 			['terra.tr_clip']={
 				env='terra',
-				loaderr='terra/tr_clip.t:10: ./terra/low.t:73: module \'xxhash_h\' not found',
 				mdeps={
+					['terra.tr_align']=true,
 					['terra.tr_types']=true
 				}
 			},
 			['terra.tr_cursor']={
 				env='terra',
-				loaderr='terra/tr_cursor.t:42: ./terra/low.t:73: module \'xxhash_h\' not found',
 				mdeps={
+					['terra.tr_align']=true,
+					['terra.tr_paint']=true,
 					['terra.tr_types']=true
 				}
 			},
 			['terra.tr_font']={
 				env='terra',
-				loaderr='terra/tr_font.t:12: ./terra/low.t:73: module \'xxhash_h\' not found',
 				mdeps={
 					['terra.tr_types']=true
 				}
 			},
 			['terra.tr_itemize']={
 				env='terra',
-				loaderr='terra/tr_itemize.t:15: ./terra/low.t:73: module \'xxhash_h\' not found',
 				mdeps={
+					['terra.tr_font']=true,
+					['terra.tr_itemize_detect_lang']=true,
+					['terra.tr_itemize_detect_script']=true,
+					['terra.tr_rle']=true,
+					['terra.tr_shape']=true,
 					['terra.tr_types']=true
 				}
 			},
 			['terra.tr_itemize_detect_lang']={
 				env='terra',
-				loaderr='terra/tr_itemize_detect_lang.t:6: ./terra/low.t:73: module \'xxhash_h\' not found',
 				mdeps={
 					['terra.tr_types']=true
 				}
 			},
 			['terra.tr_itemize_detect_script']={
 				env='terra',
-				loaderr='terra/tr_itemize_detect_script.t:5: ./terra/low.t:73: module \'xxhash_h\' not found',
 				mdeps={
 					['terra.tr_types']=true
 				}
 			},
 			['terra.tr_layoutedit']={
 				env='terra',
-				loaderr='terra/tr_layoutedit.t:6: ./terra/low.t:73: module \'xxhash_h\' not found',
+				loaderr='./terra/low.t:73: terra/tr_selection.t:10: expected a struct but found nil when attempting to add method Selection.init',
 				mdeps={
+					['terra.tr_cursor']=true,
+					['terra.tr_selection']=true,
 					['terra.tr_types']=true
 				}
 			},
 			['terra.tr_paint']={
 				env='terra',
-				loaderr='terra/tr_paint.t:6: ./terra/low.t:73: module \'xxhash_h\' not found',
 				mdeps={
+					['terra.tr_clip']=true,
+					['terra.tr_rasterize']=true,
 					['terra.tr_types']=true
 				}
 			},
 			['terra.tr_paint_cairo']={
 				env='terra',
-				loaderr='./terra/low.t:73: ./terra/low.t:73: module \'xxhash_h\' not found',
 				mdeps={
 					['terra.cairo']=true,
 					['terra.low']=true,
@@ -2199,8 +2117,8 @@ return {
 			},
 			['terra.tr_rasterize']={
 				env='terra',
-				loaderr='terra/tr_rasterize.t:10: ./terra/low.t:73: module \'xxhash_h\' not found',
 				mdeps={
+					['terra.tr_font']=true,
 					['terra.tr_types']=true
 				}
 			},
@@ -2212,49 +2130,54 @@ return {
 			},
 			['terra.tr_selection']={
 				env='terra',
-				loaderr='terra/tr_selection.t:6: ./terra/low.t:73: module \'xxhash_h\' not found',
+				loaderr='terra/tr_selection.t:10: expected a struct but found nil when attempting to add method Selection.init',
 				mdeps={
+					['terra.tr_cursor']=true,
+					['terra.tr_paint']=true,
 					['terra.tr_types']=true
 				}
 			},
 			['terra.tr_shape']={
 				env='terra',
-				loaderr='terra/tr_shape.t:13: ./terra/low.t:73: module \'xxhash_h\' not found',
 				mdeps={
+					['terra.tr_font']=true,
+					['terra.tr_rle']=true,
 					['terra.tr_types']=true
 				}
 			},
 			['terra.tr_shape_detect_lang']={
 				env='terra',
-				loaderr='terra/tr_shape_detect_lang.t:6: ./terra/low.t:73: module \'xxhash_h\' not found',
 				mdeps={
 					['terra.tr_types']=true
 				}
 			},
 			['terra.tr_shape_detect_script']={
 				env='terra',
-				loaderr='terra/tr_shape_detect_script.t:5: ./terra/low.t:73: module \'xxhash_h\' not found',
 				mdeps={
 					['terra.tr_types']=true
 				}
 			},
 			['terra.tr_shape_word']={
 				env='terra',
-				loaderr='terra/tr_shape_word.t:6: ./terra/low.t:73: module \'xxhash_h\' not found',
+				loaderr='./terralib.lua:2817: Errors reported during typechecking.',
 				mdeps={
+					['terra.tr_font']=true,
+					['terra.tr_rle']=true,
 					['terra.tr_types']=true
 				}
 			},
 			['terra.tr_spanedit']={
 				env='terra',
-				loaderr='terra/tr_spanedit.t:7: ./terra/low.t:73: module \'xxhash_h\' not found',
+				loaderr='terra/tr_spanedit.t:37: Errors reported during function declaration.',
 				mdeps={
+					['terra.rawstringview']=true,
+					['terra.tr_font']=true,
+					['terra.tr_shape']=true,
 					['terra.tr_types']=true
 				}
 			},
 			['terra.tr_types']={
 				env='terra',
-				loaderr='./terra/low.t:73: module \'xxhash_h\' not found',
 				mdeps={
 					freetype_h=true,
 					fribidi_h=true,
@@ -2271,21 +2194,21 @@ return {
 			},
 			['terra.tr_underline']={
 				env='terra',
-				loaderr='terra/tr_underline.t:6: ./terra/low.t:73: module \'xxhash_h\' not found',
 				mdeps={
+					['terra.tr_clip']=true,
+					['terra.tr_cursor']=true,
 					['terra.tr_types']=true
 				}
 			},
 			['terra.tr_wrap']={
 				env='terra',
-				loaderr='terra/tr_wrap.t:6: ./terra/low.t:73: module \'xxhash_h\' not found',
 				mdeps={
-					['terra.tr_types']=true
+					['terra.tr_types']=true,
+					['terra.tr_wrap_reorder']=true
 				}
 			},
 			['terra.tr_wrap_reorder']={
 				env='terra',
-				loaderr='terra/tr_wrap_reorder.t:14: ./terra/low.t:73: module \'xxhash_h\' not found',
 				mdeps={
 					['terra.tr_types']=true
 				}
@@ -2297,7 +2220,6 @@ return {
 		['terra.utf8']={
 			['terra.utf8']={
 				autoloads={
-					arr='terra.dynarray',
 					arrview='terra.arrayview',
 					random='terra.random',
 					randomseed='terra.random',
@@ -2345,67 +2267,6 @@ return {
 				},
 				mdeps={
 					ffi=true
-				}
-			}
-		},
-		tr0={
-			tr0={
-				mdeps={
-					bit=true,
-					box2d=true,
-					ffi=true,
-					freetype=true,
-					fribidi=true,
-					glue=true,
-					harfbuzz=true,
-					libunibreak=true,
-					lrucache=true,
-					tr0_shape_lang=true,
-					tr0_shape_reorder=true,
-					tr0_shape_script=true,
-					utf8=true
-				}
-			},
-			tr0_raster_cairo={
-				mdeps={
-					box2d=true,
-					cairo=true,
-					color=true,
-					ffi=true,
-					freetype=true,
-					glue=true,
-					['jit.zone']=true,
-					tr0_raster_ft=true
-				}
-			},
-			tr0_raster_ft={
-				mdeps={
-					bit=true,
-					ffi=true,
-					font_db=true,
-					freetype=true,
-					glue=true,
-					['jit.zone']=true,
-					lrucache=true
-				}
-			},
-			tr0_shape_lang={
-				mdeps={
-					ffi=true,
-					harfbuzz=true
-				}
-			},
-			tr0_shape_reorder={
-				mdeps={
-					bit=true,
-					glue=true
-				}
-			},
-			tr0_shape_script={
-				mdeps={
-					bit=true,
-					glue=true,
-					harfbuzz=true
 				}
 			}
 		},
@@ -2461,13 +2322,6 @@ return {
 			ui_colorpicker={
 				loaderr='./ui_colorpicker.lua:5: ./ui.lua:21: ./layer.lua:6: ./layer_h.lua:873: /media/sf_luapower/bin/linux64/liblayer.so: undefined symbol: layer_get_span_color',
 				mdeps={
-					ui=true
-				}
-			},
-			ui_demo1={
-				loaderr='./ui_demo1.lua:3: ./ui.lua:21: ./layer.lua:6: ./layer_h.lua:873: /media/sf_luapower/bin/linux64/liblayer.so: undefined symbol: layer_get_span_color',
-				mdeps={
-					time=true,
 					ui=true
 				}
 			},
@@ -2538,127 +2392,6 @@ return {
 				loaderr='./ui_zoomcalendar.lua:5: ./ui.lua:21: ./layer.lua:6: ./layer_h.lua:873: /media/sf_luapower/bin/linux64/liblayer.so: undefined symbol: layer_get_span_color',
 				mdeps={
 					ui=true
-				}
-			}
-		},
-		ui0={
-			ui0={
-				mdeps={
-					box2d=true,
-					boxblur=true,
-					cairo=true,
-					color=true,
-					easing=true,
-					events=true,
-					ffi=true,
-					glue=true,
-					['jit.zone']=true,
-					nw=true,
-					oo=true,
-					time=true,
-					tr0=true
-				}
-			},
-			ui0_button={
-				loaderr='./ui0_button.lua:78: attempt to call method \'init_priority\' (a nil value)',
-				mdeps={
-					glue=true,
-					ui0=true
-				}
-			},
-			ui0_calendar={
-				loaderr='./xlib.lua:160: assertion failed!',
-				mdeps={
-					glue=true,
-					ui0=true
-				}
-			},
-			ui0_colorpicker={
-				loaderr='./ui0_colorpicker.lua:6: ./ui0_button.lua:78: attempt to call method \'init_priority\' (a nil value)',
-				mdeps={
-					ui0=true,
-					ui0_button=true
-				}
-			},
-			ui0_dropdown={
-				loaderr='./ui0_dropdown.lua:9: ./ui0_editbox.lua:78: attempt to call method \'init_ignore\' (a nil value)',
-				mdeps={
-					ui0=true,
-					ui0_editbox=true
-				}
-			},
-			ui0_editbox={
-				loaderr='./ui0_editbox.lua:78: attempt to call method \'init_ignore\' (a nil value)',
-				mdeps={
-					box2d=true,
-					glue=true,
-					tr0=true,
-					ui0=true
-				}
-			},
-			ui0_grid={
-				loaderr='./ui0_grid.lua:6: ./ui0_scrollbox.lua:184: attempt to call method \'init_ignore\' (a nil value)',
-				mdeps={
-					ui0=true,
-					ui0_scrollbox=true
-				}
-			},
-			ui0_layout_editor={
-				mdeps={
-					box2d=true,
-					ui0=true
-				}
-			},
-			ui0_list={
-				mdeps={
-					glue=true,
-					ui0=true
-				}
-			},
-			ui0_menu={
-				mdeps={
-					ui0=true
-				}
-			},
-			ui0_popup={
-				mdeps={
-					glue=true,
-					ui0=true
-				}
-			},
-			ui0_progressbar={
-				mdeps={
-					ui0=true
-				}
-			},
-			ui0_scrollbox={
-				loaderr='./ui0_scrollbox.lua:184: attempt to call method \'init_ignore\' (a nil value)',
-				mdeps={
-					box2d=true,
-					glue=true,
-					ui0=true
-				}
-			},
-			ui0_slider={
-				loaderr='./ui0_slider.lua:574: attempt to call method \'init_ignore\' (a nil value)',
-				mdeps={
-					glue=true,
-					ui0=true
-				}
-			},
-			ui0_tablist={
-				loaderr='./ui0_tablist.lua:8: ./ui0_button.lua:78: attempt to call method \'init_priority\' (a nil value)',
-				mdeps={
-					box2d=true,
-					glue=true,
-					ui0=true,
-					ui0_button=true
-				}
-			},
-			ui0_zoomcalendar={
-				mdeps={
-					glue=true,
-					ui0=true
 				}
 			}
 		},
@@ -2753,6 +2486,7 @@ return {
 				mdeps={
 					glue=true,
 					hmac=true,
+					schema=true,
 					sha2=true,
 					webb=true,
 					webb_action=true,
@@ -2767,9 +2501,10 @@ return {
 			webb_query={
 				mdeps={
 					connpool=true,
-					mysql_client_print=true,
+					mysql_print=true,
 					sqlpp=true,
 					sqlpp_mysql=true,
+					sqlpp_tarantool=true,
 					webb=true
 				}
 			},
@@ -2841,6 +2576,8 @@ return {
 					winapi=true
 				}
 			}
+		},
+		wkhtmltopdf={
 		},
 		['x-dba']={
 			x_dba={
@@ -2983,9 +2720,14 @@ return {
 				}
 			},
 			['xlsxwriter.packager']={
-				loaderr='./xlsxwriter/packager.lua:43: module \'minizip\' not found',
 				mdeps={
-					minizip=true
+					minizip2=true,
+					['xlsxwriter.app']=true,
+					['xlsxwriter.contenttypes']=true,
+					['xlsxwriter.core']=true,
+					['xlsxwriter.relationships']=true,
+					['xlsxwriter.styles']=true,
+					['xlsxwriter.theme']=true
 				}
 			},
 			['xlsxwriter.relationships']={
@@ -3011,10 +2753,11 @@ return {
 			['xlsxwriter.utility']={
 			},
 			['xlsxwriter.workbook']={
-				loaderr='./xlsxwriter/workbook.lua:10: ./xlsxwriter/packager.lua:43: module \'minizip\' not found',
 				mdeps={
 					['xlsxwriter.format']=true,
 					['xlsxwriter.packager']=true,
+					['xlsxwriter.sharedstrings']=true,
+					['xlsxwriter.utility']=true,
 					['xlsxwriter.worksheet']=true,
 					['xlsxwriter.xmlwriter']=true
 				}
@@ -3035,6 +2778,12 @@ return {
 				},
 				mdeps={
 					bit=true,
+					ffi=true,
+					xxhash_h=true
+				}
+			},
+			xxhash_h={
+				mdeps={
 					ffi=true
 				}
 			}
@@ -3057,11 +2806,14 @@ return {
 		}
 	},
 	mingw64={
-		['ace.js']={
-		},
 		acme={
 			acme={
-				loaderr='error loading module \'acme\' from file \'.\\acme.lua\''
+				mdeps={
+					base64=true,
+					cjson=true,
+					http=true,
+					sha2=true
+				}
 			}
 		},
 		affine2d={
@@ -3099,6 +2851,7 @@ return {
 				}
 			},
 			bearssl_ec_h={
+				loaderr='.\\bearssl_ec_h.lua:122: declaration specifier expected near \'br_hash_class\' at line 78',
 				mdeps={
 					ffi=true
 				}
@@ -3133,18 +2886,18 @@ return {
 				}
 			},
 			bearssl_ssl_h={
+				loaderr='.\\bearssl_ssl_h.lua:7: .\\bearssl_x509_h.lua:3: .\\bearssl_ec_h.lua:122: declaration specifier expected near \'br_hash_class\' at line 78',
 				mdeps={
 					bearssl_block_h=true,
 					bearssl_hash_h=true,
 					bearssl_hmac_h=true,
-					bearssl_prf_h=true,
 					bearssl_rand_h=true,
-					bearssl_rsa_h=true,
 					bearssl_x509_h=true,
 					ffi=true
 				}
 			},
 			bearssl_x509_h={
+				loaderr='.\\bearssl_x509_h.lua:3: .\\bearssl_ec_h.lua:122: declaration specifier expected near \'br_hash_class\' at line 78',
 				mdeps={
 					bearssl_ec_h=true,
 					bearssl_rsa_h=true,
@@ -3218,22 +2971,6 @@ return {
 					bitmap=true,
 					ffi=true,
 					glue=true
-				}
-			}
-		},
-		bnet={
-			bnet={
-				loaderr='.\\bnet.lua:7: .\\bnet_h.lua:132: attempt to redefine \'sockaddr\' at line 5',
-				mdeps={
-					bit=true,
-					bnet_h=true,
-					ffi=true
-				}
-			},
-			bnet_h={
-				loaderr='.\\bnet_h.lua:132: attempt to redefine \'sockaddr\' at line 5',
-				mdeps={
-					ffi=true
 				}
 			}
 		},
@@ -3360,25 +3097,9 @@ return {
 			}
 		},
 		cjson={
-			cjson={
-			},
 			prettycjson={
 				mdeps={
 					['cjson.safe']=true
-				}
-			}
-		},
-		ck={
-			ck={
-				loaderr='.\\ck.lua:8: .\\x_dba.lua:7: attempt to index local \'layer\' (a nil value)',
-				mdeps={
-					['$']=true,
-					webb=true,
-					webb_action=true,
-					webb_query=true,
-					x_dba=true,
-					xmodule=true,
-					xrowset=true
 				}
 			}
 		},
@@ -3477,10 +3198,10 @@ return {
 				}
 			},
 			['cplayer.analog_clock']={
-				loaderr='.\\cplayer\\analog_clock.lua:2: module \'socket\' not found',
 				mdeps={
 					cplayer=true,
-					socket=true
+					easing=true,
+					time=true
 				}
 			},
 			['cplayer.boxlayer']={
@@ -3926,7 +3647,8 @@ return {
 		glue={
 			glue={
 				mdeps={
-					ffi=true
+					ffi=true,
+					['string.buffer']=true
 				}
 			}
 		},
@@ -3968,7 +3690,7 @@ return {
 			hd_db={
 			},
 			hd_install={
-				loaderr='.\\sock.lua:1905: .\\coro.lua:51',
+				loaderr='.\\sock.lua:1893: .\\coro.lua:51',
 				mdeps={
 					['$']=true,
 					hd_conf=true,
@@ -4034,7 +3756,7 @@ return {
 					base64=true,
 					glue=true,
 					http_date=true,
-					['lpeg.re']=true
+					relabel=true
 				}
 			},
 			http_server={
@@ -4043,12 +3765,6 @@ return {
 					glue=true,
 					http=true,
 					time=true
-				}
-			},
-			http_socket_luasec={
-				loaderr='.\\http_socket_luasec.lua:5: module \'socketloop\' not found',
-				mdeps={
-					socketloop=true
 				}
 			}
 		},
@@ -4073,22 +3789,13 @@ return {
 			}
 		},
 		jsmin={
-			jsmin={
-			}
 		},
-		lanes={
-			lanes={
-				mdeps={
-					['lanes.core']=true
-				}
-			},
-			['lanes.core']={
-			}
+		ldecnumber={
 		},
 		lexer={
 			lexer={
 				mdeps={
-					lpeg=true
+					lpeglabel=true
 				}
 			}
 		},
@@ -4097,33 +3804,6 @@ return {
 				ffi_deps={
 					lfrb=true
 				},
-				mdeps={
-					ffi=true
-				}
-			}
-		},
-		libb64={
-			libb64={
-				ffi_deps={
-					b64=true
-				},
-				mdeps={
-					ffi=true
-				}
-			}
-		},
-		libcurl={
-			libcurl={
-				ffi_deps={
-					curl=true
-				},
-				mdeps={
-					bit=true,
-					ffi=true,
-					libcurl_h=true
-				}
-			},
-			libcurl_h={
 				mdeps={
 					ffi=true
 				}
@@ -4165,8 +3845,6 @@ return {
 			}
 		},
 		libmariadb={
-		},
-		libmysql={
 		},
 		libogg={
 			libogg_h={
@@ -4302,12 +3980,22 @@ return {
 				}
 			}
 		},
-		lpeg={
-			lpeg={
-			},
-			['lpeg.re']={
+		lpeglabel={
+			relabel={
 				mdeps={
-					lpeg=true
+					lpeglabel=true
+				}
+			}
+		},
+		lpegrex={
+			lpegrex={
+				mdeps={
+					lpeglabel=true
+				}
+			},
+			lpegrex_c11={
+				mdeps={
+					lpegrex=true
 				}
 			}
 		},
@@ -4434,24 +4122,11 @@ return {
 		},
 		['luapower-repos']={
 		},
+		['luapower-repos-abandoned']={
+		},
 		luapower_db={
 			luapower_db={
-			}
-		},
-		luasec={
-			['socket.https']={
-				loaderr='.\\socket\\https.lua:9: module \'socket\' not found',
-				mdeps={
-					socket=true
-				}
-			},
-			ssl={
-				mdeps={
-					['ssl.config']=true,
-					['ssl.context']=true,
-					['ssl.core']=true,
-					['ssl.x509']=true
-				}
+				loaderr='module \'luapower_db\' not found'
 			}
 		},
 		luastate={
@@ -4507,13 +4182,6 @@ return {
 				}
 			}
 		},
-		messagepack={
-			messagepack={
-				mdeps={
-					jit=true
-				}
-			}
-		},
 		['mingw64-headers']={
 		},
 		minizip2={
@@ -4555,12 +4223,23 @@ return {
 					logging=true,
 					mm_conf=true,
 					mustache=true,
-					mysql_client=true,
+					mysql=true,
 					proc=true,
 					queue=true,
+					schema=true,
 					sock=true,
+					webb=true,
 					xapp=true,
 					xmodule=true
+				}
+			}
+		},
+		msgpack={
+			msgpack={
+				mdeps={
+					bit=true,
+					ffi=true,
+					glue=true
 				}
 			}
 		},
@@ -4583,29 +4262,13 @@ return {
 			mysql={
 				mdeps={
 					bit=true,
-					ffi=true,
-					mysql_h=true
-				}
-			},
-			mysql_h={
-				mdeps={
-					ffi=true
-				}
-			},
-			mysql_print={
-			}
-		},
-		mysql_client={
-			mysql_client={
-				mdeps={
-					bit=true,
 					errors=true,
 					ffi=true,
 					glue=true,
 					sha1=true
 				}
 			},
-			mysql_client_print={
+			mysql_print={
 				mdeps={
 					cjson=true
 				}
@@ -4897,9 +4560,7 @@ return {
 					path2d_arc=true,
 					path2d_arc_3p=true,
 					path2d_bezier2=true,
-					path2d_bezier2_hit=true,
 					path2d_bezier3=true,
-					path2d_bezier3_hit=true,
 					path2d_circle_3p=true,
 					path2d_line=true,
 					path2d_point=true,
@@ -4925,6 +4586,7 @@ return {
 			},
 			path2d_bezier2={
 				autoloads={
+					hit='path2d_bezier2_hit',
 					interpolate='path2d_bezier2_ai'
 				},
 				mdeps={
@@ -4947,6 +4609,7 @@ return {
 			},
 			path2d_bezier3={
 				autoloads={
+					hit='path2d_bezier3_hit',
 					interpolate='path2d_bezier3_ai'
 				},
 				mdeps={
@@ -5028,14 +4691,6 @@ return {
 		},
 		pixman={
 		},
-		pkcs11={
-			pkcs11={
-				mdeps={
-					ffi=true,
-					pp=true
-				}
-			}
-		},
 		pp={
 			pp={
 			}
@@ -5102,6 +4757,19 @@ return {
 				}
 			}
 		},
+		schema={
+			schema={
+				mdeps={
+					glue=true
+				}
+			},
+			schema_std={
+				mdeps={
+					glue=true,
+					schema=true
+				}
+			}
+		},
 		sha1={
 			sha1={
 			}
@@ -5158,34 +4826,34 @@ return {
 		},
 		sp={
 			sp={
-				loaderr='.\\sp.lua:43: .\\sp_admin.lua:4: attempt to call global \'sql_rowset\' (a nil value)',
+				loaderr='.\\sp.lua:44: .\\sp_db.lua:516: attempt to index global \'sp\' (a nil value)',
 				mdeps={
 					['$daemon']=true,
 					http=true,
 					http_server=true,
-					mysql_client=true,
-					sp_admin=true,
-					sp_browse=true,
+					mysql=true,
 					sp_conf=true,
 					sp_db=true,
+					tarantool=true,
 					xapp=true
 				}
 			},
 			sp_admin={
-				loaderr='.\\sp_admin.lua:4: attempt to call global \'sql_rowset\' (a nil value)'
 			},
 			sp_browse={
 			},
 			sp_conf_sample={
-				loaderr='.\\sp_conf_sample.lua:2: attempt to call global \'config\' (a nil value)'
 			},
 			sp_db={
+				loaderr='.\\sp_db.lua:516: attempt to index global \'sp\' (a nil value)',
 				mdeps={
+					schema=true,
+					webb_auth=true,
 					webb_lang=true
 				}
 			},
 			sp_prod={
-				loaderr='.\\sp_prod.lua:2: .\\sp.lua:43: .\\sp_admin.lua:4: attempt to call global \'sql_rowset\' (a nil value)',
+				loaderr='.\\sp_prod.lua:2: .\\sp.lua:44: .\\sp_db.lua:516: attempt to index global \'sp\' (a nil value)',
 				mdeps={
 					sp=true
 				}
@@ -5201,16 +4869,18 @@ return {
 			sqlpp_mysql={
 				mdeps={
 					glue=true,
-					mysql_client=true,
-					sqlpp=true
+					mysql=true
+				}
+			},
+			sqlpp_tarantool={
+				mdeps={
+					glue=true,
+					msgpack=true,
+					tarantool=true
 				}
 			}
 		},
 		['ssh-msys']={
-		},
-		struct={
-			struct={
-			}
 		},
 		tarantool={
 			tarantool={
@@ -5220,7 +4890,7 @@ return {
 					errors=true,
 					ffi=true,
 					glue=true,
-					messagepack=true,
+					msgpack=true,
 					sha1=true
 				}
 			}
@@ -5228,14 +4898,6 @@ return {
 		terra={
 			asdl={
 				mdeps={
-					terralist=true
-				}
-			},
-			terra={
-				env='terra',
-				mdeps={
-					asdl=true,
-					terralib=true,
 					terralist=true
 				}
 			},
@@ -5288,7 +4950,7 @@ return {
 		},
 		['terra.binder']={
 			['terra.binder']={
-				loaderr='.\\terra\\binder.lua:74: .\\terralib.lua:4072: attempt to call field \'loadfile\' (a nil value)',
+				env='terra',
 				mdeps={
 					['terra.low']=true
 				}
@@ -5415,20 +5077,23 @@ return {
 			layer_test_state={
 			},
 			['terra.layer']={
-				env='terra',
-				loaderr='.\\terra/low.t:73: .\\terra/low.t:73: .\\terra/low.t:73: module \'xxhash_h\' not found',
+				env='terra terra.tr_paint_cairo',
 				mdeps={
+					['terra.bitmap']=true,
+					['terra.box2d']=true,
+					['terra.boxblur']=true,
 					['terra.cairo']=true,
 					['terra.low']=true,
 					['terra.memcheck']=true,
+					['terra.tr_api']=true,
 					['terra.tr_paint_cairo']=true
 				}
 			},
 			['terra.layer_api']={
-				env='terra',
-				loaderr='terra/layer_api.t:42: .\\terra/low.t:73: .\\terra/low.t:73: .\\terra/low.t:73: module \'xxhash_h\' not found',
+				env='terra terra.tr_paint_cairo',
 				mdeps={
-					['terra.layer']=true
+					['terra.layer']=true,
+					['terra.low']=true
 				}
 			}
 		},
@@ -5445,6 +5110,7 @@ return {
 				autoloads={
 					arr='terra.dynarray',
 					arrview='terra.arrayview',
+					map='terra.hashmap',
 					random='terra.random',
 					randomseed='terra.random',
 					set='terra.hashmap'
@@ -5461,13 +5127,13 @@ return {
 				autoloads={
 					arr='terra.dynarray',
 					arrview='terra.arrayview',
+					map='terra.hashmap',
 					random='terra.random',
 					randomseed='terra.random',
 					set='terra.hashmap'
 				},
 				env='terra',
 				mdeps={
-					['terra.hashmap']=true,
 					['terra.low']=true
 				}
 			}
@@ -5507,86 +5173,100 @@ return {
 		},
 		['terra.tr']={
 			['terra.tr']={
-				env='terra',
-				loaderr='terra/tr.t:58: .\\terra/low.t:73: module \'xxhash_h\' not found',
+				env='terra terra.tr_paint_cairo',
 				mdeps={
-					['terra.tr_types']=true
+					['terra.tr_align']=true,
+					['terra.tr_clip']=true,
+					['terra.tr_itemize']=true,
+					['terra.tr_paint']=true,
+					['terra.tr_types']=true,
+					['terra.tr_wrap']=true
 				}
 			},
 			['terra.tr_align']={
-				env='terra',
-				loaderr='terra/tr_align.t:6: .\\terra/low.t:73: module \'xxhash_h\' not found',
+				env='terra terra.tr_paint_cairo',
 				mdeps={
-					['terra.tr_types']=true
+					['terra.tr_font']=true,
+					['terra.tr_types']=true,
+					['terra.tr_wrap']=true
 				}
 			},
 			['terra.tr_api']={
-				env='terra',
-				loaderr='terra/tr_api.t:49: .\\terra/low.t:73: .\\terra/low.t:73: module \'xxhash_h\' not found',
+				env='terra terra.tr_paint_cairo',
 				mdeps={
+					['terra.low']=true,
 					['terra.memcheck']=true,
-					['terra.tr_paint_cairo']=true
+					['terra.rawstringview']=true,
+					['terra.tr']=true,
+					['terra.tr_cursor']=true,
+					['terra.tr_paint_cairo']=true,
+					['terra.tr_underline']=true,
+					['terra.utf8']=true
 				}
 			},
 			['terra.tr_clip']={
-				env='terra',
-				loaderr='terra/tr_clip.t:10: .\\terra/low.t:73: module \'xxhash_h\' not found',
+				env='terra terra.tr_paint_cairo',
 				mdeps={
+					['terra.tr_align']=true,
 					['terra.tr_types']=true
 				}
 			},
 			['terra.tr_cursor']={
-				env='terra',
-				loaderr='terra/tr_cursor.t:42: .\\terra/low.t:73: module \'xxhash_h\' not found',
+				env='terra terra.tr_paint_cairo',
 				mdeps={
+					['terra.tr_align']=true,
+					['terra.tr_paint']=true,
 					['terra.tr_types']=true
 				}
 			},
 			['terra.tr_font']={
-				env='terra',
-				loaderr='terra/tr_font.t:12: .\\terra/low.t:73: module \'xxhash_h\' not found',
+				env='terra terra.tr_paint_cairo',
 				mdeps={
 					['terra.tr_types']=true
 				}
 			},
 			['terra.tr_itemize']={
-				env='terra',
-				loaderr='terra/tr_itemize.t:15: .\\terra/low.t:73: module \'xxhash_h\' not found',
+				env='terra terra.tr_paint_cairo',
 				mdeps={
+					['terra.tr_font']=true,
+					['terra.tr_itemize_detect_lang']=true,
+					['terra.tr_itemize_detect_script']=true,
+					['terra.tr_rle']=true,
+					['terra.tr_shape']=true,
 					['terra.tr_types']=true
 				}
 			},
 			['terra.tr_itemize_detect_lang']={
-				env='terra',
-				loaderr='terra/tr_itemize_detect_lang.t:6: .\\terra/low.t:73: module \'xxhash_h\' not found',
+				env='terra terra.tr_paint_cairo',
 				mdeps={
 					['terra.tr_types']=true
 				}
 			},
 			['terra.tr_itemize_detect_script']={
-				env='terra',
-				loaderr='terra/tr_itemize_detect_script.t:5: .\\terra/low.t:73: module \'xxhash_h\' not found',
+				env='terra terra.tr_paint_cairo',
 				mdeps={
 					['terra.tr_types']=true
 				}
 			},
 			['terra.tr_layoutedit']={
-				env='terra',
-				loaderr='terra/tr_layoutedit.t:6: .\\terra/low.t:73: module \'xxhash_h\' not found',
+				env='terra terra.tr_paint_cairo',
+				loaderr='.\\terra/low.t:73: terra/tr_selection.t:10: expected a struct but found nil when attempting to add method Selection.init',
 				mdeps={
+					['terra.tr_cursor']=true,
+					['terra.tr_selection']=true,
 					['terra.tr_types']=true
 				}
 			},
 			['terra.tr_paint']={
-				env='terra',
-				loaderr='terra/tr_paint.t:6: .\\terra/low.t:73: module \'xxhash_h\' not found',
+				env='terra terra.tr_paint_cairo',
 				mdeps={
+					['terra.tr_clip']=true,
+					['terra.tr_rasterize']=true,
 					['terra.tr_types']=true
 				}
 			},
 			['terra.tr_paint_cairo']={
-				env='terra',
-				loaderr='.\\terra/low.t:73: .\\terra/low.t:73: module \'xxhash_h\' not found',
+				env='terra terra.tr_paint_cairo',
 				mdeps={
 					['terra.cairo']=true,
 					['terra.low']=true,
@@ -5594,9 +5274,9 @@ return {
 				}
 			},
 			['terra.tr_rasterize']={
-				env='terra',
-				loaderr='terra/tr_rasterize.t:10: .\\terra/low.t:73: module \'xxhash_h\' not found',
+				env='terra terra.tr_paint_cairo',
 				mdeps={
+					['terra.tr_font']=true,
 					['terra.tr_types']=true
 				}
 			},
@@ -5607,50 +5287,55 @@ return {
 				}
 			},
 			['terra.tr_selection']={
-				env='terra',
-				loaderr='terra/tr_selection.t:6: .\\terra/low.t:73: module \'xxhash_h\' not found',
+				env='terra terra.tr_paint_cairo',
+				loaderr='terra/tr_selection.t:10: expected a struct but found nil when attempting to add method Selection.init',
 				mdeps={
+					['terra.tr_cursor']=true,
+					['terra.tr_paint']=true,
 					['terra.tr_types']=true
 				}
 			},
 			['terra.tr_shape']={
-				env='terra',
-				loaderr='terra/tr_shape.t:13: .\\terra/low.t:73: module \'xxhash_h\' not found',
+				env='terra terra.tr_paint_cairo',
 				mdeps={
+					['terra.tr_font']=true,
+					['terra.tr_rle']=true,
 					['terra.tr_types']=true
 				}
 			},
 			['terra.tr_shape_detect_lang']={
-				env='terra',
-				loaderr='terra/tr_shape_detect_lang.t:6: .\\terra/low.t:73: module \'xxhash_h\' not found',
+				env='terra terra.tr_paint_cairo',
 				mdeps={
 					['terra.tr_types']=true
 				}
 			},
 			['terra.tr_shape_detect_script']={
-				env='terra',
-				loaderr='terra/tr_shape_detect_script.t:5: .\\terra/low.t:73: module \'xxhash_h\' not found',
+				env='terra terra.tr_paint_cairo',
 				mdeps={
 					['terra.tr_types']=true
 				}
 			},
 			['terra.tr_shape_word']={
-				env='terra',
-				loaderr='terra/tr_shape_word.t:6: .\\terra/low.t:73: module \'xxhash_h\' not found',
+				env='terra terra.tr_paint_cairo',
+				loaderr='.\\terralib.lua:2817: Errors reported during typechecking.',
 				mdeps={
+					['terra.tr_font']=true,
+					['terra.tr_rle']=true,
 					['terra.tr_types']=true
 				}
 			},
 			['terra.tr_spanedit']={
-				env='terra',
-				loaderr='terra/tr_spanedit.t:7: .\\terra/low.t:73: module \'xxhash_h\' not found',
+				env='terra terra.tr_paint_cairo',
+				loaderr='terra/tr_spanedit.t:37: Errors reported during function declaration.',
 				mdeps={
+					['terra.rawstringview']=true,
+					['terra.tr_font']=true,
+					['terra.tr_shape']=true,
 					['terra.tr_types']=true
 				}
 			},
 			['terra.tr_types']={
-				env='terra',
-				loaderr='.\\terra/low.t:73: module \'xxhash_h\' not found',
+				env='terra terra.tr_paint_cairo',
 				mdeps={
 					freetype_h=true,
 					fribidi_h=true,
@@ -5658,7 +5343,9 @@ return {
 					libunibreak_h=true,
 					['terra.arrayfreelist']=true,
 					['terra.box2d']=true,
+					['terra.dynarray']=true,
 					['terra.fixedfreelist']=true,
+					['terra.hashmap']=true,
 					['terra.low']=true,
 					['terra.lrucache']=true,
 					['terra.phf']=true,
@@ -5666,22 +5353,22 @@ return {
 				}
 			},
 			['terra.tr_underline']={
-				env='terra',
-				loaderr='terra/tr_underline.t:6: .\\terra/low.t:73: module \'xxhash_h\' not found',
+				env='terra terra.tr_paint_cairo',
 				mdeps={
+					['terra.tr_clip']=true,
+					['terra.tr_cursor']=true,
 					['terra.tr_types']=true
 				}
 			},
 			['terra.tr_wrap']={
-				env='terra',
-				loaderr='terra/tr_wrap.t:6: .\\terra/low.t:73: module \'xxhash_h\' not found',
+				env='terra terra.tr_paint_cairo',
 				mdeps={
-					['terra.tr_types']=true
+					['terra.tr_types']=true,
+					['terra.tr_wrap_reorder']=true
 				}
 			},
 			['terra.tr_wrap_reorder']={
-				env='terra',
-				loaderr='terra/tr_wrap_reorder.t:14: .\\terra/low.t:73: module \'xxhash_h\' not found',
+				env='terra terra.tr_paint_cairo',
 				mdeps={
 					['terra.tr_types']=true
 				}
@@ -5695,6 +5382,7 @@ return {
 				autoloads={
 					arr='terra.dynarray',
 					arrview='terra.arrayview',
+					map='terra.hashmap',
 					random='terra.random',
 					randomseed='terra.random',
 					set='terra.hashmap'
@@ -5738,67 +5426,6 @@ return {
 			time={
 				mdeps={
 					ffi=true
-				}
-			}
-		},
-		tr0={
-			tr0={
-				mdeps={
-					bit=true,
-					box2d=true,
-					ffi=true,
-					freetype=true,
-					fribidi=true,
-					glue=true,
-					harfbuzz=true,
-					libunibreak=true,
-					lrucache=true,
-					tr0_shape_lang=true,
-					tr0_shape_reorder=true,
-					tr0_shape_script=true,
-					utf8=true
-				}
-			},
-			tr0_raster_cairo={
-				mdeps={
-					box2d=true,
-					cairo=true,
-					color=true,
-					ffi=true,
-					freetype=true,
-					glue=true,
-					['jit.zone']=true,
-					tr0_raster_ft=true
-				}
-			},
-			tr0_raster_ft={
-				mdeps={
-					bit=true,
-					ffi=true,
-					font_db=true,
-					freetype=true,
-					glue=true,
-					['jit.zone']=true,
-					lrucache=true
-				}
-			},
-			tr0_shape_lang={
-				mdeps={
-					ffi=true,
-					harfbuzz=true
-				}
-			},
-			tr0_shape_reorder={
-				mdeps={
-					bit=true,
-					glue=true
-				}
-			},
-			tr0_shape_script={
-				mdeps={
-					bit=true,
-					glue=true,
-					harfbuzz=true
 				}
 			}
 		},
@@ -5846,7 +5473,6 @@ return {
 				}
 			},
 			ui_calendar={
-				loaderr='.\\ui_calendar.lua:9: attempt to index field \'grid\' (a nil value)',
 				mdeps={
 					glue=true,
 					ui=true
@@ -5861,18 +5487,12 @@ return {
 					ui=true
 				}
 			},
-			ui_demo1={
-				loaderr='.\\ui.lua:1812: attempt to call method \'create_view\' (a nil value)',
-				mdeps={
-					time=true,
-					ui=true
-				}
-			},
 			ui_dropdown={
-				loaderr='.\\ui_dropdown.lua:11: attempt to index field \'editbox\' (a nil value)',
+				loaderr='.\\ui.lua:270: .\\ui_editbox.lua:7: module \'tr\' not found',
 				mdeps={
 					glue=true,
-					ui=true
+					ui=true,
+					ui_editbox=true
 				}
 			},
 			ui_editbox={
@@ -5883,11 +5503,12 @@ return {
 				}
 			},
 			ui_grid={
-				loaderr='.\\ui_grid.lua:311: attempt to index field \'scrollbox\' (a nil value)',
+				loaderr='.\\ui.lua:270: .\\ui.lua:159: assertion failed!',
 				mdeps={
 					box2d=true,
 					glue=true,
-					ui=true
+					ui=true,
+					ui_scrollbox=true
 				}
 			},
 			ui_layout_editor={
@@ -5916,8 +5537,10 @@ return {
 				}
 			},
 			ui_scrollbox={
-				loaderr='.\\ui_scrollbox.lua:5: attempt to call a table value',
+				loaderr='.\\ui.lua:159: assertion failed!',
 				mdeps={
+					box2d=true,
+					glue=true,
 					ui=true
 				}
 			},
@@ -5939,128 +5562,6 @@ return {
 				mdeps={
 					glue=true,
 					ui=true
-				}
-			}
-		},
-		ui0={
-			ui0={
-				mdeps={
-					box2d=true,
-					boxblur=true,
-					cairo=true,
-					color=true,
-					easing=true,
-					events=true,
-					ffi=true,
-					glue=true,
-					['jit.zone']=true,
-					nw=true,
-					oo=true,
-					time=true,
-					tr0=true
-				}
-			},
-			ui0_button={
-				loaderr='.\\ui0_button.lua:78: attempt to call method \'init_priority\' (a nil value)',
-				mdeps={
-					glue=true,
-					ui0=true
-				}
-			},
-			ui0_calendar={
-				loaderr='.\\ui0_calendar.lua:10: attempt to index field \'grid\' (a nil value)',
-				mdeps={
-					glue=true,
-					tr0_raster_cairo=true,
-					ui0=true
-				}
-			},
-			ui0_colorpicker={
-				loaderr='.\\ui0_colorpicker.lua:6: .\\ui0_button.lua:78: attempt to call method \'init_priority\' (a nil value)',
-				mdeps={
-					ui0=true,
-					ui0_button=true
-				}
-			},
-			ui0_dropdown={
-				loaderr='.\\ui0_dropdown.lua:9: .\\ui0_editbox.lua:78: attempt to call method \'init_ignore\' (a nil value)',
-				mdeps={
-					ui0=true,
-					ui0_editbox=true
-				}
-			},
-			ui0_editbox={
-				loaderr='.\\ui0_editbox.lua:78: attempt to call method \'init_ignore\' (a nil value)',
-				mdeps={
-					box2d=true,
-					glue=true,
-					tr0=true,
-					ui0=true
-				}
-			},
-			ui0_grid={
-				loaderr='.\\ui0_grid.lua:6: .\\ui0_scrollbox.lua:184: attempt to call method \'init_ignore\' (a nil value)',
-				mdeps={
-					ui0=true,
-					ui0_scrollbox=true
-				}
-			},
-			ui0_layout_editor={
-				mdeps={
-					box2d=true,
-					ui0=true
-				}
-			},
-			ui0_list={
-				mdeps={
-					glue=true,
-					ui0=true
-				}
-			},
-			ui0_menu={
-				mdeps={
-					ui0=true
-				}
-			},
-			ui0_popup={
-				mdeps={
-					glue=true,
-					ui0=true
-				}
-			},
-			ui0_progressbar={
-				mdeps={
-					ui0=true
-				}
-			},
-			ui0_scrollbox={
-				loaderr='.\\ui0_scrollbox.lua:184: attempt to call method \'init_ignore\' (a nil value)',
-				mdeps={
-					box2d=true,
-					glue=true,
-					ui0=true
-				}
-			},
-			ui0_slider={
-				loaderr='.\\ui0_slider.lua:574: attempt to call method \'init_ignore\' (a nil value)',
-				mdeps={
-					glue=true,
-					ui0=true
-				}
-			},
-			ui0_tablist={
-				loaderr='.\\ui0_tablist.lua:8: .\\ui0_button.lua:78: attempt to call method \'init_priority\' (a nil value)',
-				mdeps={
-					box2d=true,
-					glue=true,
-					ui0=true,
-					ui0_button=true
-				}
-			},
-			ui0_zoomcalendar={
-				mdeps={
-					glue=true,
-					ui0=true
 				}
 			}
 		},
@@ -6155,6 +5656,7 @@ return {
 				mdeps={
 					glue=true,
 					hmac=true,
+					schema=true,
 					sha2=true,
 					webb=true,
 					webb_action=true,
@@ -6169,9 +5671,10 @@ return {
 			webb_query={
 				mdeps={
 					connpool=true,
-					mysql_client_print=true,
+					mysql_print=true,
 					sqlpp=true,
 					sqlpp_mysql=true,
+					sqlpp_tarantool=true,
 					webb=true
 				}
 			},
@@ -6375,13 +5878,7 @@ return {
 				}
 			},
 			['winapi.dsound']={
-				ffi_deps={
-					dsound=true
-				},
-				mdeps={
-					winapi=true,
-					['winapi.ole']=true
-				}
+				loaderr='error loading module \'winapi.dsound\' from file \'.\\winapi\\dsound.lua\''
 			},
 			['winapi.edit']={
 				mdeps={
@@ -6979,6 +6476,8 @@ return {
 				}
 			}
 		},
+		wkhtmltopdf={
+		},
 		['x-dba']={
 			x_dba={
 				loaderr='.\\x_dba.lua:7: attempt to index local \'layer\' (a nil value)',
@@ -7052,9 +6551,14 @@ return {
 				}
 			},
 			['xlsxwriter.packager']={
-				loaderr='.\\xlsxwriter\\packager.lua:43: module \'minizip\' not found',
 				mdeps={
-					minizip=true
+					minizip2=true,
+					['xlsxwriter.app']=true,
+					['xlsxwriter.contenttypes']=true,
+					['xlsxwriter.core']=true,
+					['xlsxwriter.relationships']=true,
+					['xlsxwriter.styles']=true,
+					['xlsxwriter.theme']=true
 				}
 			},
 			['xlsxwriter.relationships']={
@@ -7080,10 +6584,11 @@ return {
 			['xlsxwriter.utility']={
 			},
 			['xlsxwriter.workbook']={
-				loaderr='.\\xlsxwriter\\workbook.lua:10: .\\xlsxwriter\\packager.lua:43: module \'minizip\' not found',
 				mdeps={
 					['xlsxwriter.format']=true,
 					['xlsxwriter.packager']=true,
+					['xlsxwriter.sharedstrings']=true,
+					['xlsxwriter.utility']=true,
 					['xlsxwriter.worksheet']=true,
 					['xlsxwriter.xmlwriter']=true
 				}
@@ -7104,6 +6609,12 @@ return {
 				},
 				mdeps={
 					bit=true,
+					ffi=true,
+					xxhash_h=true
+				}
+			},
+			xxhash_h={
+				mdeps={
 					ffi=true
 				}
 			}
