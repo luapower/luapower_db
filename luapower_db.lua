@@ -235,14 +235,14 @@ return {
 		},
 		cbframe={
 			cbframe={
-				loaderr='./fs_posix.lua:635: cannot convert \'function\' to \'void *\'',
+				loaderr='./fs_posix.lua:632: cannot convert \'function\' to \'void *\'',
 				mdeps={
 					cbframe_x86=true,
 					dynasm=true
 				}
 			},
 			cbframe_dump={
-				loaderr='./cbframe_dump.lua:2: ./fs_posix.lua:635: cannot convert \'function\' to \'void *\'',
+				loaderr='./cbframe_dump.lua:2: ./fs_posix.lua:632: cannot convert \'function\' to \'void *\'',
 				mdeps={
 					cbframe=true,
 					ffi=true
@@ -538,9 +538,9 @@ return {
 					gif=true
 				},
 				mdeps={
+					bit=true,
 					ffi=true,
-					giflib_h=true,
-					glue=true
+					giflib_h=true
 				}
 			},
 			giflib_h={
@@ -754,9 +754,7 @@ return {
 		},
 		libpng={
 			libpng={
-				ffi_deps={
-					png=true
-				},
+				loaderr='./libpng.lua:11: ./libpng_h.lua:1789: declaration specifier expected near \'png_byte\' at line 19',
 				mdeps={
 					bit=true,
 					ffi=true,
@@ -766,6 +764,7 @@ return {
 				}
 			},
 			libpng_h={
+				loaderr='./libpng_h.lua:1789: declaration specifier expected near \'png_byte\' at line 19',
 				mdeps={
 					ffi=true
 				}
@@ -786,6 +785,23 @@ return {
 				}
 			},
 			libsoundio_h={
+				mdeps={
+					ffi=true
+				}
+			}
+		},
+		libspng={
+			libspng={
+				ffi_deps={
+					spng=true
+				},
+				mdeps={
+					bit=true,
+					ffi=true,
+					libspng_h=true
+				}
+			},
+			libspng_h={
 				mdeps={
 					ffi=true
 				}
@@ -1172,7 +1188,7 @@ return {
 				}
 			},
 			nw_cocoa={
-				loaderr='./nw_cocoa.lua:9: ./fs_posix.lua:635: cannot convert \'function\' to \'void *\'',
+				loaderr='./nw_cocoa.lua:9: ./fs_posix.lua:632: cannot convert \'function\' to \'void *\'',
 				mdeps={
 					bit=true,
 					box2d=true,
@@ -1676,13 +1692,12 @@ return {
 		},
 		sp={
 			sp={
+				loaderr='./sp.lua:44: ./sp_db.lua:516: attempt to index global \'sp\' (a nil value)',
 				mdeps={
 					['$daemon']=true,
 					http=true,
 					http_server=true,
 					mysql=true,
-					sp_admin=true,
-					sp_browse=true,
 					sp_conf=true,
 					sp_db=true,
 					tarantool=true,
@@ -1696,14 +1711,15 @@ return {
 			sp_conf_sample={
 			},
 			sp_db={
+				loaderr='./sp_db.lua:516: attempt to index global \'sp\' (a nil value)',
 				mdeps={
 					schema=true,
-					schema_std=true,
 					webb_auth=true,
 					webb_lang=true
 				}
 			},
 			sp_prod={
+				loaderr='./sp_prod.lua:2: ./sp.lua:44: ./sp_db.lua:516: attempt to index global \'sp\' (a nil value)',
 				mdeps={
 					sp=true
 				}
@@ -1931,7 +1947,7 @@ return {
 			layer_test_state={
 			},
 			['terra.layer']={
-				env='terra',
+				env='terra terra.tr_paint_cairo',
 				mdeps={
 					['terra.bitmap']=true,
 					['terra.box2d']=true,
@@ -1944,7 +1960,7 @@ return {
 				}
 			},
 			['terra.layer_api']={
-				env='terra',
+				env='terra terra.tr_paint_cairo',
 				mdeps={
 					['terra.layer']=true,
 					['terra.low']=true
@@ -2027,7 +2043,7 @@ return {
 		},
 		['terra.tr']={
 			['terra.tr']={
-				env='terra',
+				env='terra terra.tr_paint_cairo',
 				mdeps={
 					['terra.tr_align']=true,
 					['terra.tr_clip']=true,
@@ -2038,7 +2054,7 @@ return {
 				}
 			},
 			['terra.tr_align']={
-				env='terra',
+				env='terra terra.tr_paint_cairo',
 				mdeps={
 					['terra.tr_font']=true,
 					['terra.tr_types']=true,
@@ -2046,7 +2062,7 @@ return {
 				}
 			},
 			['terra.tr_api']={
-				env='terra',
+				env='terra terra.tr_paint_cairo',
 				mdeps={
 					['terra.low']=true,
 					['terra.memcheck']=true,
@@ -2059,14 +2075,14 @@ return {
 				}
 			},
 			['terra.tr_clip']={
-				env='terra',
+				env='terra terra.tr_paint_cairo',
 				mdeps={
 					['terra.tr_align']=true,
 					['terra.tr_types']=true
 				}
 			},
 			['terra.tr_cursor']={
-				env='terra',
+				env='terra terra.tr_paint_cairo',
 				mdeps={
 					['terra.tr_align']=true,
 					['terra.tr_paint']=true,
@@ -2074,13 +2090,13 @@ return {
 				}
 			},
 			['terra.tr_font']={
-				env='terra',
+				env='terra terra.tr_paint_cairo',
 				mdeps={
 					['terra.tr_types']=true
 				}
 			},
 			['terra.tr_itemize']={
-				env='terra',
+				env='terra terra.tr_paint_cairo',
 				mdeps={
 					['terra.tr_font']=true,
 					['terra.tr_itemize_detect_lang']=true,
@@ -2091,19 +2107,19 @@ return {
 				}
 			},
 			['terra.tr_itemize_detect_lang']={
-				env='terra',
+				env='terra terra.tr_paint_cairo',
 				mdeps={
 					['terra.tr_types']=true
 				}
 			},
 			['terra.tr_itemize_detect_script']={
-				env='terra',
+				env='terra terra.tr_paint_cairo',
 				mdeps={
 					['terra.tr_types']=true
 				}
 			},
 			['terra.tr_layoutedit']={
-				env='terra',
+				env='terra terra.tr_paint_cairo',
 				loaderr='./terra/low.t:73: terra/tr_selection.t:10: expected a struct but found nil when attempting to add method Selection.init',
 				mdeps={
 					['terra.tr_cursor']=true,
@@ -2112,7 +2128,7 @@ return {
 				}
 			},
 			['terra.tr_paint']={
-				env='terra',
+				env='terra terra.tr_paint_cairo',
 				mdeps={
 					['terra.tr_clip']=true,
 					['terra.tr_rasterize']=true,
@@ -2120,7 +2136,7 @@ return {
 				}
 			},
 			['terra.tr_paint_cairo']={
-				env='terra',
+				env='terra terra.tr_paint_cairo',
 				mdeps={
 					['terra.cairo']=true,
 					['terra.low']=true,
@@ -2128,7 +2144,7 @@ return {
 				}
 			},
 			['terra.tr_rasterize']={
-				env='terra',
+				env='terra terra.tr_paint_cairo',
 				mdeps={
 					['terra.tr_font']=true,
 					['terra.tr_types']=true
@@ -2141,7 +2157,7 @@ return {
 				}
 			},
 			['terra.tr_selection']={
-				env='terra',
+				env='terra terra.tr_paint_cairo',
 				loaderr='terra/tr_selection.t:10: expected a struct but found nil when attempting to add method Selection.init',
 				mdeps={
 					['terra.tr_cursor']=true,
@@ -2150,7 +2166,7 @@ return {
 				}
 			},
 			['terra.tr_shape']={
-				env='terra',
+				env='terra terra.tr_paint_cairo',
 				mdeps={
 					['terra.tr_font']=true,
 					['terra.tr_rle']=true,
@@ -2158,19 +2174,19 @@ return {
 				}
 			},
 			['terra.tr_shape_detect_lang']={
-				env='terra',
+				env='terra terra.tr_paint_cairo',
 				mdeps={
 					['terra.tr_types']=true
 				}
 			},
 			['terra.tr_shape_detect_script']={
-				env='terra',
+				env='terra terra.tr_paint_cairo',
 				mdeps={
 					['terra.tr_types']=true
 				}
 			},
 			['terra.tr_shape_word']={
-				env='terra',
+				env='terra terra.tr_paint_cairo',
 				loaderr='./terralib.lua:2817: Errors reported during typechecking.',
 				mdeps={
 					['terra.tr_font']=true,
@@ -2179,7 +2195,7 @@ return {
 				}
 			},
 			['terra.tr_spanedit']={
-				env='terra',
+				env='terra terra.tr_paint_cairo',
 				loaderr='terra/tr_spanedit.t:37: Errors reported during function declaration.',
 				mdeps={
 					['terra.rawstringview']=true,
@@ -2189,7 +2205,7 @@ return {
 				}
 			},
 			['terra.tr_types']={
-				env='terra',
+				env='terra terra.tr_paint_cairo',
 				mdeps={
 					freetype_h=true,
 					fribidi_h=true,
@@ -2197,7 +2213,9 @@ return {
 					libunibreak_h=true,
 					['terra.arrayfreelist']=true,
 					['terra.box2d']=true,
+					['terra.dynarray']=true,
 					['terra.fixedfreelist']=true,
+					['terra.hashmap']=true,
 					['terra.low']=true,
 					['terra.lrucache']=true,
 					['terra.phf']=true,
@@ -2205,7 +2223,7 @@ return {
 				}
 			},
 			['terra.tr_underline']={
-				env='terra',
+				env='terra terra.tr_paint_cairo',
 				mdeps={
 					['terra.tr_clip']=true,
 					['terra.tr_cursor']=true,
@@ -2213,14 +2231,14 @@ return {
 				}
 			},
 			['terra.tr_wrap']={
-				env='terra',
+				env='terra terra.tr_paint_cairo',
 				mdeps={
 					['terra.tr_types']=true,
 					['terra.tr_wrap_reorder']=true
 				}
 			},
 			['terra.tr_wrap_reorder']={
-				env='terra',
+				env='terra terra.tr_paint_cairo',
 				mdeps={
 					['terra.tr_types']=true
 				}
@@ -2257,7 +2275,8 @@ return {
 					color=true,
 					ffi=true,
 					glue=true,
-					nw=true
+					nw=true,
+					time=true
 				}
 			}
 		},
@@ -2361,7 +2380,10 @@ return {
 				}
 			},
 			ui_list={
-				loaderr='error loading module \'ui_list\' from file \'./ui_list.lua\''
+				loaderr='./ui_list.lua:5: ./ui.lua:21: ./layer.lua:6: ./layer_h.lua:873: /media/sf_luapower/bin/linux64/liblayer.so: undefined symbol: layer_get_span_color',
+				mdeps={
+					ui=true
+				}
 			},
 			ui_menu={
 				loaderr='./ui_menu.lua:5: ./ui.lua:21: ./layer.lua:6: ./layer_h.lua:873: /media/sf_luapower/bin/linux64/liblayer.so: undefined symbol: layer_get_span_color',
@@ -2862,7 +2884,6 @@ return {
 				}
 			},
 			bearssl_ec_h={
-				loaderr='.\\bearssl_ec_h.lua:122: declaration specifier expected near \'br_hash_class\' at line 78',
 				mdeps={
 					ffi=true
 				}
@@ -2897,18 +2918,18 @@ return {
 				}
 			},
 			bearssl_ssl_h={
-				loaderr='.\\bearssl_ssl_h.lua:7: .\\bearssl_x509_h.lua:3: .\\bearssl_ec_h.lua:122: declaration specifier expected near \'br_hash_class\' at line 78',
 				mdeps={
 					bearssl_block_h=true,
 					bearssl_hash_h=true,
 					bearssl_hmac_h=true,
+					bearssl_prf_h=true,
 					bearssl_rand_h=true,
+					bearssl_rsa_h=true,
 					bearssl_x509_h=true,
 					ffi=true
 				}
 			},
 			bearssl_x509_h={
-				loaderr='.\\bearssl_x509_h.lua:3: .\\bearssl_ec_h.lua:122: declaration specifier expected near \'br_hash_class\' at line 78',
 				mdeps={
 					bearssl_ec_h=true,
 					bearssl_rsa_h=true,
@@ -3008,6 +3029,7 @@ return {
 				mdeps={
 					bundle_appversion=true,
 					ffi=true,
+					fs=true,
 					['package.exedir']=true
 				}
 			},
@@ -3078,14 +3100,14 @@ return {
 		},
 		cbframe={
 			cbframe={
-				loaderr='.\\fs_win.lua:165: attempt to get length of local \'s\' (a function value)',
+				loaderr='.\\fs_win.lua:171: attempt to get length of local \'s\' (a function value)',
 				mdeps={
 					cbframe_x86=true,
 					dynasm=true
 				}
 			},
 			cbframe_dump={
-				loaderr='.\\cbframe_dump.lua:2: .\\fs_win.lua:165: attempt to get length of local \'s\' (a function value)',
+				loaderr='.\\cbframe_dump.lua:2: .\\fs_win.lua:171: attempt to get length of local \'s\' (a function value)',
 				mdeps={
 					cbframe=true,
 					ffi=true
@@ -3644,9 +3666,9 @@ return {
 					gif=true
 				},
 				mdeps={
+					bit=true,
 					ffi=true,
-					giflib_h=true,
-					glue=true
+					giflib_h=true
 				}
 			},
 			giflib_h={
@@ -3868,9 +3890,7 @@ return {
 		},
 		libpng={
 			libpng={
-				ffi_deps={
-					png=true
-				},
+				loaderr='.\\libpng.lua:11: .\\libpng_h.lua:1789: declaration specifier expected near \'png_byte\' at line 19',
 				mdeps={
 					bit=true,
 					ffi=true,
@@ -3880,6 +3900,7 @@ return {
 				}
 			},
 			libpng_h={
+				loaderr='.\\libpng_h.lua:1789: declaration specifier expected near \'png_byte\' at line 19',
 				mdeps={
 					ffi=true
 				}
@@ -3914,6 +3935,23 @@ return {
 				}
 			},
 			libsoundio_h={
+				mdeps={
+					ffi=true
+				}
+			}
+		},
+		libspng={
+			libspng={
+				ffi_deps={
+					spng=true
+				},
+				mdeps={
+					bit=true,
+					ffi=true,
+					libspng_h=true
+				}
+			},
+			libspng_h={
 				mdeps={
 					ffi=true
 				}
@@ -4298,7 +4336,7 @@ return {
 				}
 			},
 			nw_cocoa={
-				loaderr='.\\nw_cocoa.lua:9: .\\fs_win.lua:165: attempt to get length of local \'s\' (a function value)',
+				loaderr='.\\nw_cocoa.lua:9: .\\fs_win.lua:171: attempt to get length of local \'s\' (a function value)',
 				mdeps={
 					bit=true,
 					box2d=true,
@@ -4836,13 +4874,12 @@ return {
 		},
 		sp={
 			sp={
+				loaderr='.\\sp.lua:44: .\\sp_db.lua:516: attempt to index global \'sp\' (a nil value)',
 				mdeps={
 					['$daemon']=true,
 					http=true,
 					http_server=true,
 					mysql=true,
-					sp_admin=true,
-					sp_browse=true,
 					sp_conf=true,
 					sp_db=true,
 					tarantool=true,
@@ -4856,14 +4893,15 @@ return {
 			sp_conf_sample={
 			},
 			sp_db={
+				loaderr='.\\sp_db.lua:516: attempt to index global \'sp\' (a nil value)',
 				mdeps={
 					schema=true,
-					schema_std=true,
 					webb_auth=true,
 					webb_lang=true
 				}
 			},
 			sp_prod={
+				loaderr='.\\sp_prod.lua:2: .\\sp.lua:44: .\\sp_db.lua:516: attempt to index global \'sp\' (a nil value)',
 				mdeps={
 					sp=true
 				}
@@ -4954,6 +4992,8 @@ return {
 			['terra.rawstringview']={
 				env='terra',
 				mdeps={
+					['terra.arrayview']=true,
+					['terra.dynarray']=true,
 					['terra.low']=true
 				}
 			}
@@ -5120,6 +5160,7 @@ return {
 				autoloads={
 					arr='terra.dynarray',
 					arrview='terra.arrayview',
+					map='terra.hashmap',
 					random='terra.random',
 					randomseed='terra.random',
 					set='terra.hashmap'
@@ -5389,14 +5430,12 @@ return {
 		['terra.utf8']={
 			['terra.utf8']={
 				autoloads={
-					arrview='terra.arrayview',
 					random='terra.random',
 					randomseed='terra.random',
 					set='terra.hashmap'
 				},
 				env='terra',
 				mdeps={
-					['terra.dynarray']=true,
 					['terra.low']=true
 				}
 			}
@@ -5416,7 +5455,8 @@ return {
 					color=true,
 					ffi=true,
 					glue=true,
-					nw=true
+					nw=true,
+					time=true
 				}
 			}
 		},
@@ -5481,11 +5521,9 @@ return {
 				}
 			},
 			ui_calendar={
-				loaderr='.\\ui.lua:270: .\\ui.lua:270: .\\ui.lua:159: assertion failed!',
 				mdeps={
 					glue=true,
-					ui=true,
-					ui_grid=true
+					ui=true
 				}
 			},
 			ui_colorpicker={
@@ -5528,7 +5566,10 @@ return {
 				}
 			},
 			ui_list={
-				loaderr='error loading module \'ui_list\' from file \'.\\ui_list.lua\''
+				mdeps={
+					glue=true,
+					ui=true
+				}
 			},
 			ui_menu={
 				mdeps={
@@ -5889,7 +5930,13 @@ return {
 				}
 			},
 			['winapi.dsound']={
-				loaderr='error loading module \'winapi.dsound\' from file \'.\\winapi\\dsound.lua\''
+				ffi_deps={
+					dsound=true
+				},
+				mdeps={
+					winapi=true,
+					['winapi.ole']=true
+				}
 			},
 			['winapi.edit']={
 				mdeps={
